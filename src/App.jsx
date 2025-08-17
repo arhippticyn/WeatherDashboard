@@ -1,9 +1,12 @@
-import Button from "./components/Button";
+import Button from "./components/Template/Button";
+import Header from "./components/Template/Header/Header";
 
 function App() {
-  return <>
-  <Button text={'hello'}  style={{ width: "150px", height: "50px" }}  />
-  </>;
+  return (
+    <div className="page-wrapper">
+      <Header />
+    </div>
+  )
 }
 
 export default App;
