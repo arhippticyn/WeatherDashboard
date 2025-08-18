@@ -18,7 +18,7 @@ const Header = () => {
             <div className="header-wrapper">
         <header className="header">
             <nav className="header-nav">
-                <img src={logo} alt="logo" className="header-nav__img" />
+                <div className="header-nav-image"><img src={logo} alt="logo" className="header-nav-image__img" /></div>
 
                 <h2 onClick={toggleMenu} className="header-nav__menu active">Menu <GoChevronDown /></h2>
 

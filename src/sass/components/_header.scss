@@ -7,9 +7,11 @@
         align-items: center;
         justify-content: space-between;
 
-        &__img {
-            width: 50px;
-            height: 34px;
+        &-image {        
+             &__img {
+                width: 50px;
+                height: 34px;
+            }
         }
 
         &__menu {
@@ -19,6 +21,7 @@ font-size: 13px;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
+cursor: pointer;
         }
 
         &-lists {
@@ -41,6 +44,7 @@ line-height: normal;
             width: 100px;
             height: 40px;
             display: none;
+            cursor: pointer;
         }
 
         &__user {
@@ -49,6 +53,101 @@ height: 40px;
 flex-shrink: 0;
 display: none;
         }
+    }
+}
+
+
+@media (min-width: 834px) {
+    .header {
+        &-wrapper {
+            padding: 15px 20px;
+        }
+
+        &-nav {
+        display: flex;
+        align-items: center;
+        
+        &-image {        
+    
+             &__img {
+                width: 54px;
+                height: 36px;
+            }
+        }
+
+
+        &__menu {
+
+            &.active {
+                display: none;
+            }
+        }
+
+        &-lists {
+            display: block;
+            display: flex;
+            flex-direction: row;
+            column-gap: 35px;
+            width: 450px;
+
+        }
+
+        &__btn {
+           display: block;
+        }
+
+        &__user {
+            display: block;
+        }
+    }
+    }
+}
+
+@media (min-width: 1440px) {
+    .header {
+        &-wrapper {
+            padding: 15px 45px;
+        }
+
+         &-nav {
+        display: flex;
+        align-items: center;
+        
+
+        &-image {
+            width: 150px;
+            &__img {
+            width: 64px;
+            height: 46px;
+        }
+        }
+
+        &__menu {
+
+            &.active {
+                display: none;
+            }
+        }
+
+        &-lists {
+            display: block;
+            display: flex;
+            flex-direction: row;
+            column-gap: 35px;
+            width: 900px;
+
+        }
+
+        &__btn {
+           display: block;
+           width: 100px;
+           height: 40px;
+        }
+
+        &__user {
+            display: block;
+        }
+    }
     }
 }
 
