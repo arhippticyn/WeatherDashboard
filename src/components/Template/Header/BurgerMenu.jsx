@@ -1,5 +1,5 @@
 import React from "react";
-import { GoChevronDown, GoChevronRight } from "react-icons/go";
+import { GoChevronDown } from "react-icons/go";
 import logo from "../../../image/forecastlogo.svg";
 import Button from "../Button";
 import logoUser from "../../../image/user.svg";
@@ -10,7 +10,7 @@ const BurgerMenu = ({ isOpen, toggleMenu }) => {
             <nav className="mobile-header-top">
                 <img src={logo} alt="logo" className="mobile-header-top__img" />
                     <h2 className="mobile-header-top__menu" onClick={toggleMenu}>
-          Menu <GoChevronDown style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)", transition: "0.3s" }} />
+          Menu <GoChevronDown style={{ transform: isOpen ? "rotate(-90deg)" : "rotate(0deg)", transition: "0.3s" }} />
         </h2>
             </nav>
 
