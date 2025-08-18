@@ -5,8 +5,10 @@ import { EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 
+const PIXABAY_KEY = import.meta.env.VITE_PIXABAY_KEY;
+const PIXABAY_BASE_URL = import.meta.env.VITE_PIXABAY_DATA;
 
-axios.defaults.baseURL = 'https://pixabay.com/api'
+axios.defaults.baseURL = PIXABAY_BASE_URL
 
 const Nature = () => {
     const [images, setImages] = useState([])
@@ -14,7 +16,7 @@ const Nature = () => {
 
     const fetchImages = async (pageNum = 1) => {
         try {
-            const response = await axios.get(`/?key=51105397-aef3055b6813d883a5d382b16&category=mountains&image_type=photo&per_page=10&page=${pageNum}`)
+            const response = await axios.get(`/?key=${PIXABAY_KEY}&category=mountains&image_type=photo&per_page=10&page=${pageNum}`)
             setImages((prev) => [...prev, ...response.data.hits]);
         } catch (error) {
             console.log(error);
