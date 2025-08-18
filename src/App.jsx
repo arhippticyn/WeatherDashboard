@@ -1,10 +1,11 @@
-import Button from "./components/Template/Button";
-import Header from "./components/Template/Header/Header";
+import Header from "./components/Header/Header";
+import Main from "./components/Main";
 
 function App() {
   return (
     <div className="page-wrapper">
       <Header />
+      <Main />
     </div>
   )
 }
