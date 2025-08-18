@@ -1,8 +1,8 @@
 import React from "react";
 import { GoChevronDown } from "react-icons/go";
-import logo from "../../../image/forecastlogo.svg";
-import Button from "../Button";
-import logoUser from "../../../image/user.svg";
+import logo from "../../image/forecastlogo.svg";
+import Button from "../Template/Button";
+import logoUser from "../../image/user.svg";
 
 const BurgerMenu = ({ isOpen, toggleMenu }) => {
   return (

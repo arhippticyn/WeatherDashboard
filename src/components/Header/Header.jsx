@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import logo from "../../../image/forecastlogo.svg";
-import Button from "../Button";
-import logoUser from "../../../image/user.svg";
+import logo from "../../image/forecastlogo.svg";
+import Button from "../Template/Button";
+import logoUser from "../../image/user.svg";
 import { GoChevronDown } from "react-icons/go";
 import BurgerMenu from "./BurgerMenu";
 
