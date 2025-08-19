@@ -4,7 +4,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  background: #fff;
+  background: $primary-color;
   transform: translateY(-100%);
   transition: transform 0.6s ease;
   z-index: 999;
@@ -25,7 +25,7 @@
         }
 
         &__menu {
-            color: #000;
+            color: $text-dark;
 font-family: "Montserrat Alternates";
 font-size: 13px;
 font-style: normal;
@@ -39,7 +39,7 @@ line-height: normal;
      &-down {
         display: flex;
         column-gap: 160px;
-        background: #E6E6E6;
+        background: $text-light;
         height: 100vh;
         padding-top: 20px;
 
@@ -51,7 +51,7 @@ line-height: normal;
             list-style: none;
 
             &__list {
-                color: #000;
+                color: $text-dark;
 font-family: "Montserrat Alternates";
 font-size: 13px;
 font-style: normal;
