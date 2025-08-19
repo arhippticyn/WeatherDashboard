@@ -15,7 +15,7 @@
         }
 
         &__menu {
-            color: #000;
+            color: $text-dark;
 font-family: "Montserrat Alternates";
 font-size: 13px;
 font-style: normal;
@@ -31,7 +31,7 @@ cursor: pointer;
             display: none;
 
             &__list {
-                color: #000;
+                color: $text-dark;
 font-family: "Montserrat Alternates";
 font-size: 12px;
 font-style: normal;
