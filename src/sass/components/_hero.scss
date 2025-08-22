@@ -1,0 +1,128 @@
+.hero {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-content {
+    max-width: 800px;
+
+    &-title {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    &-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    &-date {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      input {
+        padding: 0.7rem 1rem;
+        border: none;
+        border-radius: 25px 0 0 25px;
+        outline: none;
+        width: 250px;
+      }
+
+      button {
+        padding: 0.7rem 1rem;
+        border: none;
+        border-radius: 0 25px 25px 0;
+        background: #f5a623;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  /* 📱 Адаптивність */
+  @media (max-width: 1024px) {
+    .hero-content {
+      &-title {
+        font-size: 2.5rem;
+      }
+      &-subtitle {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    height: 60vh;
+
+    .hero-content {
+      &-title {
+        font-size: 2rem;
+      }
+      &-subtitle {
+        font-size: 0.95rem;
+      }
+      &-date {
+        font-size: 0.9rem;
+      }
+
+      .search-box input {
+        width: 200px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    height: 50vh;
+
+    .hero-content {
+      &-title {
+        font-size: 1.6rem;
+      }
+      &-subtitle {
+        font-size: 0.85rem;
+      }
+      &-date {
+        font-size: 0.8rem;
+      }
+
+      .search-box {
+        flex-direction: column;
+        gap: 0.5rem;
+
+        input {
+          border-radius: 25px;
+          width: 100%;
+        }
+
+        button {
+          border-radius: 25px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
