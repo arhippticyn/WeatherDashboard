@@ -1,0 +1,14 @@
+@import "modern-normalize/modern-normalize.css";
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: calc(12 / 10);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
