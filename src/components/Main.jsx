@@ -11,8 +11,6 @@ const Main = () => {
       <main className="main">
         <Hero />
         <Pets />
-
-
         <Nature />
         <WeatherForecast />
       </main>

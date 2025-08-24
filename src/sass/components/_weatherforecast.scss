@@ -1,6 +1,6 @@
 .weather {
-  font-family: "Montserrat";
-  font-size: 400;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   padding: 20px;
   max-width: 900px;
   border-radius: 25px;
@@ -62,19 +62,18 @@
 
   &__list {
     display: flex;
-    flex-direction: column; 
-    gap: 12px; 
+    flex-direction: column;
+    gap: 12px;
   }
 
   &__card {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 12px;
     border-radius: 10px;
-    width: auto;
-    text-align: center;
-    justify-content: space-between;
     background: #D9D9D9;
-
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
   &__date {
@@ -82,23 +81,28 @@
     margin-bottom: 8px;
   }
 
+  &__icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 8px;
+  }
+
   &__temps {
     display: flex;
-
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
   }
+
   &__temp {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin: 0;
   }
 
   &__desc {
     font-size: 14px;
     color: #000000;
     text-transform: capitalize;
-  }
-  &__icon {
-    width: 60px;
-    height: 60px;
   }
 }
