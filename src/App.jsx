@@ -1,12 +1,13 @@
 import Header from "./components/Header/Header";
 import Main from "./components/Main";
-import Cards from "./components/Cards/Cards";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <div className="page-wrapper">
       <Header />
       <Main />
-      <Cards></Cards>
+      <Footer />
     </div>
   );
 }
