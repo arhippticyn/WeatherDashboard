@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="page-wrapper">
       <Header />
-      <Pets />
       <Main />
     <Footer />
     </div>
