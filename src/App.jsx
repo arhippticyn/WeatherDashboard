@@ -1,13 +1,17 @@
 import Header from "./components/Header/Header";
 import Main from "./components/Main";
+import Pets from "./components/Pets/Pets"
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="page-wrapper">
       <Header />
+      <Pets />
       <Main />
+    <Footer />
     </div>
-  )
+  );
 }
 
 export default App;
