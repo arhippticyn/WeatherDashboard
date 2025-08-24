@@ -1,5 +1,6 @@
 import React from "react";
-import "../../components/_hero.scss"; 
+import { FiSearch } from "react-icons/fi"; 
+import "./_hero.scss";
 
 const Hero = () => {
   return (
@@ -16,7 +17,9 @@ const Hero = () => {
 
           <div className="search-box">
             <input type="text" placeholder="Search location..." />
-            <button>🔍</button>
+            <button>
+              <FiSearch />
+            </button>
           </div>
         </div>
       </div>
