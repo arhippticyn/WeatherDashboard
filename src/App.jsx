@@ -1,6 +1,7 @@
 import Header from "./components/Header/Header";
 import Main from "./components/Main";
 import Pets from "./components/Pets/Pets"
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -8,9 +9,9 @@ function App() {
       <Header />
       <Pets />
       <Main />
-      
+    <Footer />
     </div>
-  )
+  );
 }
 
 export default App;
