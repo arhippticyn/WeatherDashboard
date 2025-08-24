@@ -6,8 +6,8 @@ const Main = () => {
   return (
     <div className="main-wrapper">
       <main className="main">
-        <Nature />
         <WeatherForecast />
+        <Nature />
       </main>
     </div>
   )
