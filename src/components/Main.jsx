@@ -2,15 +2,15 @@ import React from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
 import WeatherForecast from "./WeatherForecast";
-import Pets from "./Pets/Pets";
 import Hero from "./Hero/Hero";
+import News from "./News/News";
 
 const Main = () => {
   return (
     <div className="main-wrapper">
       <main className="main">
         <Hero />
-        <Pets />
+        <News />
         <Nature />
         <Graph
           data={[
@@ -18,7 +18,7 @@ const Main = () => {
             20, 30, 10,
           ]}
         ></Graph>
-        <WeatherForecast />
+        {/* <WeatherForecast /> */}
       </main>
     </div>
   );

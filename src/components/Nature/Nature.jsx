@@ -8,20 +8,31 @@ import "swiper/css/effect-coverflow";
 const PIXABAY_KEY = import.meta.env.VITE_PIXABAY_KEY;
 const PIXABAY_BASE_URL = import.meta.env.VITE_PIXABAY_DATA;
 
-axios.defaults.baseURL = PIXABAY_BASE_URL
+
 
 const Nature = () => {
     const [images, setImages] = useState([])
     const [page, setPage] = useState(1);
 
     const fetchImages = async (pageNum = 1) => {
-        try {
-            const response = await axios.get(`/?key=${PIXABAY_KEY}&category=mountains&image_type=photo&per_page=10&page=${pageNum}`)
-            setImages((prev) => [...prev, ...response.data.hits]);
-        } catch (error) {
-            console.log(error);
-        }
+  try {
+    const response = await axios.get(
+      `${PIXABAY_BASE_URL}?key=${PIXABAY_KEY}&category=mountains&image_type=photo&per_page=10&page=${pageNum}`
+    );
+
+    console.log("FULL RESPONSE:", response); // 👈 Посмотреть всё
+    console.log("DATA:", response.data);     // 👈 Посмотреть только data
+
+    if (Array.isArray(response.data?.hits)) {
+      setImages((prev) => [...prev, ...response.data.hits]);
+    } else {
+      console.error("Нет массива hits в ответе:", response.data);
     }
+  } catch (error) {
+    console.log("Ошибка запроса:", error);
+  }
+};
+
 
     useEffect(() => {
     fetchImages(page);
