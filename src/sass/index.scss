@@ -3,22 +3,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "./utils/variables.scss";
 @import "./global/reset.scss";
-@import "./global/common.scss";
-
-
-@import "./utils/variables.scss";
-@import "./global/reset.scss";
-@import "./global/common.scss";
+@import "./global/common.scss"
 
 @import './components/btn.scss';
 @import './components/header.scss';
 @import './components//burgermenu.scss';
 @import './components/nature.scss';
-@import './components/pets.scss';
+@import './components/news.scss';
 @import './components/hero.scss';
 @import './components/weatherforecast.scss';
 @import './components/footer.scss';
-
 @import "./components/btn.scss";
 @import "./components/header.scss";
 @import "./components/hero.scss";
