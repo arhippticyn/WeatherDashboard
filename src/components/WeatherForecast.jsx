@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function WeatherForecast() {
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
+
+axios.defaults.baseURL = WEATHER_BASE_URL;
+
+const WeatherForecast = () => {
   const [city, setCity] = useState("Kyiv");
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_KEY = "51dc7fe66c4bebf36f6762b120eaa1ae";
-
-  const fetchWeather = async () => {
-    if (!city.trim()) return;
+  const fetchWeather = async (selectedCity = city) => {
+    if (!selectedCity.trim()) return;
 
     setLoading(true);
     setError(null);
 
     try {
-      const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`
+      const response = await axios.get(
+        `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
-      setForecast(data.list);
+      setForecast(response.data.list);
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
-      setError("Не вдалося знайти прогноз для цього міста 😢");
+      setError("Не вдалося знайти прогноз для цього міста");
     } finally {
       setLoading(false);
     }
@@ -45,7 +48,6 @@ export default function WeatherForecast() {
     return `${day}, ${number} ${month}`;
   };
 
-
   const groupForecastByDay = () => {
     const grouped = {};
 
@@ -66,14 +68,11 @@ export default function WeatherForecast() {
       }
     });
 
-    return Object.values(grouped).slice(0, 5); 
+    return Object.values(grouped).slice(0, 5);
   };
-
-  const dailyForecast = groupForecastByDay();
 
   return (
     <div className="weather">
-
       <div className="weather__search">
         <input
           type="text"
@@ -82,32 +81,43 @@ export default function WeatherForecast() {
           placeholder="Введіть місто"
           className="weather__input"
         />
-        <button onClick={fetchWeather} className="weather__button">
+        <button
+          type="button"
+          onClick={() => fetchWeather(city)}
+          className="weather__button"
+        >
           Пошук
         </button>
       </div>
 
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
       {error && <p className="weather__error">{error}</p>}
-      <h2 className="weather__title">5-day forecast</h2>
-      <div className="weather__list">
-        {dailyForecast.map((item, index) => (
-          <div key={index} className="weather__card">
-            <p className="weather__date">{formatDate(item.date)}</p>
-            <div className="weather__temps">
-            <img
-              className="weather__icon"
-              src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
-              alt={item.description}
-            />
-              <p className="weather__temp-main">
-                {Math.round(item.max)}°C / {Math.round(item.min)}°C
-              </p>
-            </div>
-            <p className="weather__desc">{item.description}</p>
+
+      {!loading && !error && forecast.length > 0 && (
+        <>
+          <h2 className="weather__title">5-day forecast</h2>
+          <div className="weather__list">
+            {groupForecastByDay().map((item, index) => (
+              <div key={index} className="weather__card">
+                <p className="weather__date">{formatDate(item.date)}</p>
+                <div className="weather__temps">
+                  <img
+                    className="weather__icon"
+                    src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
+                    alt={item.description}
+                  />
+                  <p className="weather__temp-main">
+                    {Math.round(item.max)}°C / {Math.round(item.min)}°C
+                  </p>
+                </div>
+                <p className="weather__desc">{item.description}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
-}
+};
+
+export default WeatherForecast;
