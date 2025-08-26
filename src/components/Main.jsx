@@ -1,11 +1,16 @@
 import React from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
+import WeatherForecast from "./WeatherForecast";
+import Pets from "./Pets/Pets";
+import Hero from "./Hero/Hero";
 
 const Main = () => {
   return (
     <div className="main-wrapper">
       <main className="main">
+        <Hero />
+        <Pets />
         <Nature />
         <Graph
           data={[
@@ -13,6 +18,7 @@ const Main = () => {
             20, 30, 10,
           ]}
         ></Graph>
+        <WeatherForecast />
       </main>
     </div>
   );
