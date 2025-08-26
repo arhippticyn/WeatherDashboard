@@ -18,7 +18,7 @@ const Main = () => {
             20, 30, 10,
           ]}
         ></Graph>
-        {/* <WeatherForecast /> */}
+        <WeatherForecast />
       </main>
     </div>
   );
