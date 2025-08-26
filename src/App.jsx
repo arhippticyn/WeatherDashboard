@@ -7,7 +7,8 @@ function App() {
   return (
     <div className="page-wrapper">
       <Header />
-      <News />
+
+
       <Main />
     <Footer />
     </div>
