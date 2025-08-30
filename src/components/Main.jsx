@@ -9,7 +9,6 @@ const Main = () => {
   return (
     <div className="main-wrapper">
       <main className="main">
-        <Hero />
         <News />
         <Nature />
         <Graph

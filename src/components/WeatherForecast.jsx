@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import CardsCharact from "./Cards/CardsCharact";
-
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
-
 
 axios.defaults.baseURL = WEATHER_BASE_URL;
 
@@ -18,13 +15,8 @@ const WeatherForecast = () => {
   const [error, setError] = useState(null);
 
 
-
-  const fetchWeather = async () => {
-    if (!city.trim()) return;
-
   const fetchWeather = async (selectedCity = city) => {
     if (!selectedCity.trim()) return;
-
 
     setLoading(true);
     setError(null);
@@ -33,7 +25,7 @@ const WeatherForecast = () => {
       const response = await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
-      setCurrentWeather(data.list[0]);
+      setCurrentWeather(response.data.list[0]);
       setForecast(response.data.list);
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
@@ -43,11 +35,12 @@ const WeatherForecast = () => {
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     fetchWeather();
+    
   }, []);
 
-  const formatDate = (dateString) => {
+    const formatDate = (dateString) => {
     const date = new Date(dateString);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
@@ -60,14 +53,9 @@ const WeatherForecast = () => {
     return `${day}, ${number} ${month}`;
   };
 
-
-  const dailyForecast = forecast.filter((item) =>
+    const dailyForecast = forecast.filter((item) =>
     item.dt_txt.includes("12:00:00")
   );
-
-  return (
-    <div className="weather">
-      <h2 className="weather__title">Прогноз погоди на 5 днів</h2>
 
   const groupForecastByDay = () => {
     const grouped = {};
@@ -92,7 +80,8 @@ const WeatherForecast = () => {
     return Object.values(grouped).slice(0, 5);
   };
 
-
+  return (
+    <div className="weather">
       <div className="weather__search">
         <input
           type="text"
@@ -114,13 +103,6 @@ const WeatherForecast = () => {
       {error && <p className="weather__error">{error}</p>}
 
       {currentWeather && <CardsCharact data={currentWeather} />}
-
-      <div className="weather__list">
-        {dailyForecast.map((item) => (
-          <div key={item.dt} className="weather__card">
-            <p className="weather__date">{formatDate(item.dt_txt)}</p>
-            <p className="weather__temp">{Math.round(item.main.temp)}°C</p>
-            <p className="weather__desc">{item.weather[0].description}</p>
 
       {!loading && !error && forecast.length > 0 && (
         <>
@@ -146,11 +128,8 @@ const WeatherForecast = () => {
         </>
       )}
     </div>
-  );
+  )
 
 }
 
-};
-
-export default WeatherForecast;
-
+export default WeatherForecast
