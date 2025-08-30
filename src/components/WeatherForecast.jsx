@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import CardsCharact from "./Cards/CardsCharact";
 
 export default function WeatherForecast() {
   const [city, setCity] = useState("Kyiv");
   const [forecast, setForecast] = useState([]);
+  const [currentWeather, setCurrentWeather] = useState(null); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_KEY = "51dc7fe66c4bebf36f6762b120eaa1ae"; 
+  const API_KEY = "51dc7fe66c4bebf36f6762b120eaa1ae";
 
   const fetchWeather = async () => {
     if (!city.trim()) return;
@@ -21,6 +22,7 @@ export default function WeatherForecast() {
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=uk&appid=${API_KEY}`
       );
       setForecast(data.list);
+      setCurrentWeather(data.list[0]);
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
       setError("Не вдалося знайти прогноз для цього міста 😢");
@@ -29,13 +31,11 @@ export default function WeatherForecast() {
     }
   };
 
-  // Завантажуємо прогноз при першому рендері
   useEffect(() => {
     fetchWeather();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
-  // Форматуємо дату
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const days = ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
@@ -44,7 +44,6 @@ export default function WeatherForecast() {
     return `${day}, ${number}`;
   };
 
-  // Беремо лише один прогноз на день — о 12:00
   const dailyForecast = forecast.filter((item) =>
     item.dt_txt.includes("12:00:00")
   );
@@ -53,7 +52,6 @@ export default function WeatherForecast() {
     <div className="weather">
       <h2 className="weather__title">Прогноз погоди на 5 днів</h2>
 
-      {/* Форма пошуку */}
       <div className="weather__search">
         <input
           type="text"
@@ -67,13 +65,11 @@ export default function WeatherForecast() {
         </button>
       </div>
 
-      {/* Стан завантаження */}
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
-
-      {/* Вивід помилки */}
       {error && <p className="weather__error">{error}</p>}
 
-      {/* Вивід прогнозу */}
+      {currentWeather && <CardsCharact data={currentWeather} />}
+
       <div className="weather__list">
         {dailyForecast.map((item) => (
           <div key={item.dt} className="weather__card">

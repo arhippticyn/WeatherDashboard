@@ -1,6 +1,7 @@
 import React from "react";
 import Nature from "./Nature/Nature";
 import WeatherForecast from "./WeatherForecast";
+import CardsCharact from "./Cards/CardsCharact"
 
 const Main = () => {
   return (
@@ -8,6 +9,7 @@ const Main = () => {
       <main className="main">
         <Nature />
         <WeatherForecast />
+        <CardsCharact />
       </main>
     </div>
   )
