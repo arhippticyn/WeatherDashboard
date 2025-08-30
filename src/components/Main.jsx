@@ -2,7 +2,7 @@ import React from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
 import WeatherForecast from "./WeatherForecast";
-import Hero from "./Hero/Hero";
+import CardsCharact from "./Cards/CardsCharact"
 import News from "./News/News";
 
 const Main = () => {
@@ -19,6 +19,7 @@ const Main = () => {
           ]}
         ></Graph>
         <WeatherForecast />
+        <CardsCharact />
       </main>
     </div>
   );

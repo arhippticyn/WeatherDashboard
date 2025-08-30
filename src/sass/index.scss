@@ -5,6 +5,7 @@
 @import "./global/reset.scss";
 @import "./global/common.scss";
 
+@import "./utils/variables.scss";
 @import './components/btn.scss';
 @import './components/header.scss';
 @import './components//burgermenu.scss';
@@ -19,5 +20,5 @@
 @import "./components/burgermenu.scss";
 @import "./components/nature.scss";
 @import "./components/cards.scss";
+@import "./components/cardscharact.scss";
 @import "./components/graph.scss";
-
