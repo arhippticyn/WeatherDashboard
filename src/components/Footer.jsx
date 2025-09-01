@@ -28,7 +28,7 @@ const Footer = () => {
             href="/"
             title=""
           >
-            <img src={instagram} alt="" srcSet="" />
+            <img src={instagram} alt="" srcset="" />
           </a>
 
           <a
@@ -39,7 +39,7 @@ const Footer = () => {
             aria-label="Instagram"
             title="Instagram"
           >
-            <img src={facebook} alt="" srcSet="" />
+            <img src={facebook} alt="" srcset="" />
           </a>
 
           <a
@@ -50,7 +50,7 @@ const Footer = () => {
             aria-label="YouTube"
             title="YouTube"
           >
-            <img src={whatsapp} alt="" srcSet="" />
+            <img src={whatsapp} alt="" srcset="" />
           </a>
         </nav>
       </div>
