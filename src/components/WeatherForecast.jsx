@@ -10,10 +10,8 @@ axios.defaults.baseURL = WEATHER_BASE_URL;
 const WeatherForecast = () => {
   const [city, setCity] = useState("Kyiv");
   const [forecast, setForecast] = useState([]);
-  const [currentWeather, setCurrentWeather] = useState(null); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
 
   const fetchWeather = async (selectedCity = city) => {
     if (!selectedCity.trim()) return;
@@ -22,11 +20,13 @@ const WeatherForecast = () => {
     setError(null);
 
     try {
-      const response = await axios.get(
+      const response= await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
+      setForecast(forecastResponse.data.list);
       setCurrentWeather(response.data.list[0]);
       setForecast(response.data.list);
+
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
       setError("Не вдалося знайти прогноз для цього міста");
@@ -57,11 +57,12 @@ const WeatherForecast = () => {
     item.dt_txt.includes("12:00:00")
   );
 
+
   const groupForecastByDay = () => {
     const grouped = {};
 
     forecast.forEach((item) => {
-      const date = item.dt_txt.split(" ")[0]; 
+      const date = item.dt_txt.split(" ")[0];
 
       if (!grouped[date]) {
         grouped[date] = {
@@ -102,7 +103,9 @@ const WeatherForecast = () => {
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
       {error && <p className="weather__error">{error}</p>}
 
+
       {currentWeather && <CardsCharact data={currentWeather} />}
+
 
       {!loading && !error && forecast.length > 0 && (
         <>
@@ -128,8 +131,9 @@ const WeatherForecast = () => {
         </>
       )}
     </div>
-  )
+  );
+};
 
-}
+
 
 export default WeatherForecast
