@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CardsCharact from "./Cards/CardsCharact";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
@@ -19,10 +20,13 @@ const WeatherForecast = () => {
     setError(null);
 
     try {
-      const forecastResponse = await axios.get(
+      const response= await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setForecast(forecastResponse.data.list);
+      setCurrentWeather(response.data.list[0]);
+      setForecast(response.data.list);
+
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
       setError("Не вдалося знайти прогноз для цього міста");
@@ -31,11 +35,12 @@ const WeatherForecast = () => {
     }
   };
 
-  useEffect(() => {
+   useEffect(() => {
     fetchWeather();
+    
   }, []);
 
-  const formatDate = (dateString) => {
+    const formatDate = (dateString) => {
     const date = new Date(dateString);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
@@ -47,6 +52,11 @@ const WeatherForecast = () => {
     const month = months[date.getMonth()];
     return `${day}, ${number} ${month}`;
   };
+
+    const dailyForecast = forecast.filter((item) =>
+    item.dt_txt.includes("12:00:00")
+  );
+
 
   const groupForecastByDay = () => {
     const grouped = {};
@@ -93,6 +103,10 @@ const WeatherForecast = () => {
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
       {error && <p className="weather__error">{error}</p>}
 
+
+      {currentWeather && <CardsCharact data={currentWeather} />}
+
+
       {!loading && !error && forecast.length > 0 && (
         <>
           <h2 className="weather__title">5-day forecast</h2>
@@ -120,4 +134,6 @@ const WeatherForecast = () => {
   );
 };
 
-export default WeatherForecast;
+
+
+export default WeatherForecast
