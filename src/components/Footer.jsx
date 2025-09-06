@@ -1,23 +1,22 @@
 import React from 'react';
 import logo from "../image/forecastlogo.svg";
-import facebook from "../iconsFooter/facebook.svg";
-import instagram from "../iconsFooter/instagram.svg";
-import whatsapp from "../iconsFooter/whatsapp.svg";
 
+// Импорт иконок из react-icons
+import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
-<footer className="footer" role="contentinfo">
+    <footer className="footer" role="contentinfo">
       <div className="footer__inner">
         <a className="footer__brand" href="/">
-          <img className="footer__logo" src={logo}/>
+          <img className="footer__logo" src={logo} alt="Forecast Logo" />
         </a>
 
         <section className="footer-adress">
-            <span className="footer-adress_span">Address</span>
-            <span className="footer-adress_str">Svobody str. 35</span>
-            <span className="footer-adress_sity">Kyiv</span>
-            <span className="footer-adress_country">Ukraine</span>
+          <span className="footer-adress_span">Address</span>
+          <span className="footer-adress_str">Svobody str. 35</span>
+          <span className="footer-adress_sity">Kyiv</span>
+          <span className="footer-adress_country">Ukraine</span>
         </section>
 
         <p className="p">Contact us</p>
@@ -26,20 +25,12 @@ const Footer = () => {
           <a
             className="footer__social-link"
             href="/"
-            title=""
-          >
-            <img src={instagram} alt="" srcset="" />
-          </a>
-
-          <a
-            className="footer__social-link"
-            href="/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
             title="Instagram"
           >
-            <img src={facebook} alt="" srcset="" />
+            <FaInstagram size={24} />
           </a>
 
           <a
@@ -47,14 +38,26 @@ const Footer = () => {
             href="/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="YouTube"
-            title="YouTube"
+            aria-label="Facebook"
+            title="Facebook"
           >
-            <img src={whatsapp} alt="" srcset="" />
+            <FaFacebook size={24} />
+          </a>
+
+          <a
+            className="footer__social-link"
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            title="WhatsApp"
+          >
+            <FaWhatsapp size={24} />
           </a>
         </nav>
       </div>
-    </footer>  );
-}
+    </footer>
+  );
+};
 
 export default Footer;
