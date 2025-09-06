@@ -14,7 +14,7 @@ if (window.innerWidth >= 1440) {
 
 Chart.defaults.color = "rgba(0, 0, 0, 1)";
 
-export default function Graph({ data }) {
+export default function Graph({ data, labels, city }) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
 
@@ -26,32 +26,10 @@ export default function Graph({ data }) {
     chartRef.current = new Chart(canvasRef.current, {
       type: "line",
       data: {
-        labels: [
-          "",
-          "11 pm",
-          "12 pm",
-          "1 am",
-          "2 am",
-          "3 am",
-          "4 am",
-          "5 am",
-          "6 am",
-          "7 am",
-          "8 am",
-          "9 am",
-          "10 am",
-          "11 am",
-          "12 am",
-          "1 pm",
-          "2 pm",
-          "3pm",
-          "4 pm",
-          "5 pm",
-          "6 pm",
-          "",
-        ],
+        labels: labels,
         datasets: [
           {
+            label: `Temperature in ${city}`, 
             backgroundColor: "rgba(255, 179, 108, 0.3)",
             borderColor: "rgba(255, 179, 108, 1)",
             borderWidth: 3,
@@ -68,28 +46,26 @@ export default function Graph({ data }) {
         scales: {
           x: {
             position: "top",
-
             ticks: {
               align: "center",
             },
           },
-
           y: {
             offset: true,
           },
         },
         plugins: {
           legend: {
-            display: false,
+            display: true, 
           },
         },
       },
     });
-  }, [data]);
+  }, [data, labels, city]);
 
   return (
     <div className="graph__container">
-      <h2 className="graph__title">Hourly forecast</h2>
+      <h2 className="graph__title">Hourly forecast for {city}</h2>
       <div className="graph" width={3000}>
         <canvas
           id="tempGraph"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardsCharact from "./Cards/CardsCharact";
+import Graph from "./Graph/Graph";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
@@ -81,8 +82,19 @@ const WeatherForecast = () => {
     return Object.values(grouped).slice(0, 5);
   };
 
+  const chartData = forecast.slice(0, 12).map((item) => item.main.temp)
+    
+  const chartLabels = forecast.slice(0, 12).map((item) => {
+    const date = new Date(item.dt_txt);
+    return date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
+  });
+
   return (
-    <div className="weather">
+    <div>
+      {!loading && !error && forecast.length > 0 && (
+        <Graph data={chartData} labels={chartLabels} city={city} />
+)}
+      <div className="weather">
       <div className="weather__search">
         <input
           type="text"
@@ -104,7 +116,7 @@ const WeatherForecast = () => {
       {error && <p className="weather__error">{error}</p>}
 
 
-      {currentWeather && <CardsCharact data={currentWeather} />}
+
 
 
       {!loading && !error && forecast.length > 0 && (
@@ -131,6 +143,8 @@ const WeatherForecast = () => {
         </>
       )}
     </div>
+    </div>
+    
   );
 };
 
