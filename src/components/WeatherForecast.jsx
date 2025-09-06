@@ -11,7 +11,7 @@ const WeatherForecast = () => {
   const [city, setCity] = useState("Kyiv");
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentWeather, setCurrentWeather] = useState(null);
+
   const [error, setError] = useState(null);
 
   const fetchWeather = async (selectedCity = city) => {
@@ -24,7 +24,7 @@ const WeatherForecast = () => {
       const response= await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
-      setCurrentWeather(response.data.list[0]);
+      
       setForecast(response.data.list);
 
     } catch (error) {
@@ -101,6 +101,7 @@ const WeatherForecast = () => {
       </div>
 
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
+
       {error && <p className="weather__error">{error}</p>}
 
 
