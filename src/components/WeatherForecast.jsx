@@ -23,11 +23,13 @@ const WeatherForecast = () => {
       const response = await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
       );
-<<<<<<< Updated upstream
-=======
+
 
       setForecast(response.data.list);
->>>>>>> Stashed changes
+
+
+      setForecast(response.data.list);
+
 
       setForecast(response.data.list);
     } catch (error) {
