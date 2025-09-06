@@ -5,25 +5,20 @@
 @import "./global/reset.scss";
 @import "./global/common.scss";
 
-
 @import "./utils/variables.scss";
-@import "./global/reset.scss";
-@import "./global/common.scss";
-
-
 @import './components/btn.scss';
 @import './components/header.scss';
 @import './components//burgermenu.scss';
 @import './components/nature.scss';
-@import './components/pets.scss';
+@import './components/news.scss';
 @import './components/hero.scss';
 @import './components/weatherforecast.scss';
 @import './components/footer.scss';
-
 @import "./components/btn.scss";
 @import "./components/header.scss";
 @import "./components/hero.scss";
 @import "./components/burgermenu.scss";
 @import "./components/nature.scss";
 @import "./components/cards.scss";
-
+@import "./components/cardscharact.scss";
+@import "./components/graph.scss";

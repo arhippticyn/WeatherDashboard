@@ -24,8 +24,10 @@ export default function CardsCharact({ city = "Kyiv" }) {
         `/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setData(response.data);
+
     } catch (error) {
       setError("Не вдалося завантажити погоду" , error);
+
     } finally {
       setLoading(false);
     }

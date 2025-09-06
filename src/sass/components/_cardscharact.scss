@@ -1,0 +1,94 @@
+.weather-container {
+    width: 80%;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: $background;
+    border-radius: 20px;
+}
+
+.weather-card {
+    width: 25%;
+    height: 217px;
+    background: $bg-card;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    .weather-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 12px;
+    }
+
+    .label {
+        font-size: 16px;
+        font-weight: 500;
+        color: $text-dark;
+        margin: 5px 0;
+    }
+
+    .value {
+        font-size: 18px;
+        font-weight: bold;
+        color: $text-dark;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .weather-card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .weather-card {
+        flex: 1 1 100%;
+    }
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid $bg-card;
+  border-top: 5px solid $primary-color;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
+}
