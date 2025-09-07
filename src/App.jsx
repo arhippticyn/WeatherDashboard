@@ -11,6 +11,7 @@ function App() {
       <Hero />
       <Main />
       <Footer />
+      <AuthModal></AuthModal>
     </div>
   );
 }

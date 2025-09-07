@@ -1,46 +1,53 @@
 import { useState } from "react";
-import styles from "./AuthModal.module.scss";
 
 export default function AuthModal() {
   const [type, setType] = useState("register");
 
   return (
-    <div className={styles.backdrop}>
-      <div className={styles.modal}>
-        <h2 className={styles.title}>
+    <div className="auth-backdrop">
+      <div className="auth-modal">
+        <h2 className="auth-modal__title">
           {type === "register" ? "Sign up" : "Login"}
         </h2>
-        <label className={styles.label}>
+        <label className="auth-modal__label">
           Username
-          <input type="text" placeholder="Username" className={styles.input} />
+          <input
+            type="text"
+            placeholder="Username"
+            className="auth-modal__input"
+          />
         </label>
 
         {type === "register" && (
-          <label className={styles.label}>
+          <label className="auth-modal__label">
             E-Mail
-            <input type="email" placeholder="E-Mail" className={styles.input} />
+            <input
+              type="email"
+              placeholder="E-Mail"
+              className="auth-modal__input"
+            />
           </label>
         )}
 
-        <label className={styles.label}>
+        <label className="auth-modal__label">
           Password
           <input
             type="password"
             placeholder="Password"
-            className={styles.input}
+            className="auth-modal__input"
           />
         </label>
 
-        <button type="button" className={styles.btn}>
+        <button type="button" className="auth-modal__btn">
           {type === "register" ? "Sign up" : "Login"}
         </button>
 
-        <p className={styles.text}>
+        <p className="auth-modal__text">
           {type === "register" ? (
             <>
               Already have an account?{" "}
               <button
-                className={`${styles.btnChange} ${styles.btnToLogin}`}
+                className="auth-modal__btn-change"
                 onClick={() => setType("login")}
               >
                 Log in
@@ -50,7 +57,7 @@ export default function AuthModal() {
             <>
               Don’t have an account?{" "}
               <button
-                className={`${styles.btnChange} ${styles.btnToRegister}`}
+                className="auth-modal__btn-change"
                 onClick={() => setType("register")}
               >
                 Register
