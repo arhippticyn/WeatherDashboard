@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoIosRefresh } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { CiTrash } from "react-icons/ci";
+import Graph from "../Graph/Graph";
 
 export default function CardsItem({
   city,
@@ -11,7 +12,24 @@ export default function CardsItem({
   imgSrc,
   imgAlt,
   temp,
+  setGraphData,
+  graphData
 }) {
+
+  const handleHourlyClick = () => {
+    setGraphData([
+      10, 20, 30, 20, 10, 20, 40, 50, 20, 30, 10,
+      30, 20, 10, 20, 40, 50, 20, 30, 10
+    ]); 
+    
+    if (graphData) {
+      setGraphData(null);
+    } else {
+      setGraphData(data);
+    }
+  };
+
+
   return (
     <>
       <li className="cards__item item">
@@ -23,7 +41,7 @@ export default function CardsItem({
         <h2 className="item__temperature">{time}</h2>
 
         <div className="item__buttons buttons">
-          <button className="buttons__hourly button">Hourly forecast</button>
+          <button className="buttons__hourly button" onClick={handleHourlyClick}>Hourly forecast</button>
           <button className="buttons__weekly button">Weekly forecast</button>
         </div>
 

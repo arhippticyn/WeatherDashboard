@@ -2,7 +2,7 @@ import React from "react";
 import CardsItem from "./CardsItem";
 import sun from "../../image/sun.png";
 
-export default function Cards() {
+export default function Cards({setGraphData, graphData}) {
   return (
     <>
       <ul className="cards__list">
@@ -14,6 +14,8 @@ export default function Cards() {
           imgSrc={sun}
           imgAlt={"Sun"}
           temp={"22℃"}
+          setGraphData={setGraphData}
+          graphData={graphData}
         ></CardsItem>
         <CardsItem
           city={"Prague"}
@@ -23,6 +25,8 @@ export default function Cards() {
           imgSrc={sun}
           imgAlt={"Sun"}
           temp={"22℃"}
+          setGraphData={setGraphData}
+          graphData={graphData}
         ></CardsItem>{" "}
         <CardsItem
           city={"Prague"}
@@ -32,6 +36,8 @@ export default function Cards() {
           imgSrc={sun}
           imgAlt={"Sun"}
           temp={"22℃"}
+          setGraphData={setGraphData}
+          graphData={graphData}
         ></CardsItem>
       </ul>
     </>
