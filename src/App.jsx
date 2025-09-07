@@ -11,7 +11,7 @@ function App() {
       <Hero />
       <Main />
       <Footer />
-      <AuthModal></AuthModal>
+      {/* <AuthModal></AuthModal> */}
     </div>
   );
 }
