@@ -2,6 +2,7 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero/Hero";
+import AuthModal from "./components/AuthModal/AuthModal";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Header />
       <Hero />
       <Main />
-    <Footer />
+      <Footer />
+      {/* <AuthModal></AuthModal> */}
     </div>
   );
 }
