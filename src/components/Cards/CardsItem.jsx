@@ -3,7 +3,7 @@ import { IoIosRefresh } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { CiTrash } from "react-icons/ci";
 
-export default function CardsItem({
+export const CardsItem = ({
   city,
   country,
   time,
@@ -11,7 +11,19 @@ export default function CardsItem({
   imgSrc,
   imgAlt,
   temp,
-}) {
+}) => {
+  const splitDate = () => {
+    const splittedDate = date.split(" ");
+    const dateProcessed = splittedDate[1];
+    const formattedDate = dateProcessed.split("/").join(".");
+
+    const splittedDay = splittedDate[0].split(",");
+    const finalDate = formattedDate + " | " + splittedDay[0];
+
+    return finalDate;
+  };
+
+  splitDate();
   return (
     <>
       <li className="cards__item item">
@@ -27,7 +39,7 @@ export default function CardsItem({
           <button className="buttons__weekly button">Weekly forecast</button>
         </div>
 
-        <p className="item__date date">{date}</p>
+        <p className="item__date date">{splitDate()}</p>
         <div className="item__main">
           <div className="main__img-container img-Container">
             <img src={imgSrc} alt={imgAlt} />
@@ -50,4 +62,4 @@ export default function CardsItem({
       </li>
     </>
   );
-}
+};

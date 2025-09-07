@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
 import WeatherForecast from "./WeatherForecast";
-import CardsCharact from "./Cards/CardsCharact"
+import CardsCharact from "./Cards/CardsCharact";
 import News from "./News/News";
-import Hero from "./Hero/Hero"
-
-const Main = () => {
+import Hero from "./Hero/Hero";
+import { Cards } from "./Cards/Cards";
+const Main = ({ searchValue }) => {
   return (
     <div className="main-wrapper">
       <main className="main">
         <News />
+        <Cards query={searchValue}></Cards>
         <Nature />
         <Graph
           data={[
@@ -26,4 +27,3 @@ const Main = () => {
 };
 
 export default Main;
-
