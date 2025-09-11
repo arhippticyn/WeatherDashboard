@@ -17,9 +17,9 @@ export const CardsItem = ({
   imgSrc,
   imgAlt,
   temp,
-    setGraphData,
+  setGraphData,
   graphData
-}) {
+}) => {
   
    const splitDate = () => {
     const splittedDate = date.split(" ");

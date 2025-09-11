@@ -17,7 +17,7 @@ function App() {
 
   const handleWeeklyClick = (city) => {
     setSelectedCity(city);
-
+  }}
   return (
     <div className="page-wrapper">
       <Header />
