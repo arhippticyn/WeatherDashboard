@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CardsCharact from "./Cards/CardsCharact";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
@@ -12,8 +11,9 @@ const WeatherForecast = ({ city }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchWeather = async (selectedCity = city) => {
-    if (!selectedCity?.trim()) return;
+  const fetchWeather = async () => {
+    if (!city.trim()) return;
+
 
     setLoading(true);
     setError(null);
@@ -21,6 +21,7 @@ const WeatherForecast = ({ city }) => {
     try {
       const response = await axios.get(
         `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
+
       );
       setForecast(response.data.list);
     } catch (error) {
@@ -33,14 +34,25 @@ const WeatherForecast = ({ city }) => {
 
   useEffect(() => {
     fetchWeather(city);
+
   }, [city]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
     const day = days[date.getDay()];
     const number = date.getDate();
@@ -50,7 +62,7 @@ const WeatherForecast = ({ city }) => {
 
   const groupForecastByDay = () => {
     const grouped = {};
-
+    
     forecast.forEach((item) => {
       const date = item.dt_txt.split(" ")[0];
 
@@ -67,7 +79,6 @@ const WeatherForecast = ({ city }) => {
         grouped[date].max = Math.max(grouped[date].max, item.main.temp);
       }
     });
-
     return Object.values(grouped).slice(0, 5);
   };
 
@@ -78,6 +89,7 @@ const WeatherForecast = ({ city }) => {
 
       {!loading && !error && forecast.length > 0 && (
         <>
+
           <h2 className="weather__title">
             5-day forecast for <span className="weather__city">{city}</span>
           </h2>
