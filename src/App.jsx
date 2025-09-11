@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero/Hero";
 import Cards from "./components/Cards/Cards";
+import AuthModal from "./components/AuthModal/AuthModal";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
