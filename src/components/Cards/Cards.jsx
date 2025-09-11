@@ -8,7 +8,7 @@ const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 axios.defaults.baseURL = WEATHER_BASE_URL;
 
-export const Cards = ({ query }) => {
+export const Cards = ({ query, setGraphData, graphData }) => {
   const [error, setError] = useState("");
   const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -97,6 +97,7 @@ export const Cards = ({ query }) => {
             ></CardsItem>
           );
         })}
+
       </ul>
     </>
   );
