@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
@@ -19,10 +20,10 @@ const Main = () => {
         <WeatherForecast />
         <News />
         <Nature />
+
       </main>
     </div>
   );
 };
 
 export default Main;
-

@@ -41,5 +41,6 @@ export default function Cards({setGraphData, graphData}) {
         ></CardsItem>
       </ul>
     </>
+
   );
 }
