@@ -9,7 +9,7 @@ import axios from 'axios';
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
 
-export default function CardsItem({
+export const CardsItem = ({
   city,
   country,
   time,
@@ -17,9 +17,22 @@ export default function CardsItem({
   imgSrc,
   imgAlt,
   temp,
-  setGraphData,
+    setGraphData,
   graphData
 }) {
+  
+   const splitDate = () => {
+    const splittedDate = date.split(" ");
+    const dateProcessed = splittedDate[1];
+    const formattedDate = dateProcessed.split("/").join(".");
+
+    const splittedDay = splittedDate[0].split(",");
+    const finalDate = formattedDate + " | " + splittedDay[0];
+
+    return finalDate;
+  };
+
+  splitDate();
 
   const handleHourlyClick = async () => {
     try {
@@ -58,6 +71,14 @@ export default function CardsItem({
           <button className="buttons__weekly button">Weekly forecast</button>
         </div>
 
+        <p className="item__date date">{splitDate()}</p>
+        <div className="item__main">
+          <div className="main__img-container img-Container">
+            <img src={imgSrc} alt={imgAlt} />
+          </div>
+          <h2 className="main__temp">{temp}</h2>
+        </div>
+
 
       <p className="item__date date">{date}</p>
       <div className="item__main">
@@ -81,4 +102,4 @@ export default function CardsItem({
       </div>
     </li>
   );
-}
+};
