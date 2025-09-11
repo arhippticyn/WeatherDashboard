@@ -3,6 +3,11 @@ import { IoIosRefresh } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { CiTrash } from "react-icons/ci";
 import Graph from "../Graph/Graph";
+import axios from 'axios';
+
+
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
 
 export default function CardsItem({
   city,
@@ -16,17 +21,26 @@ export default function CardsItem({
   graphData
 }) {
 
-  const handleHourlyClick = () => {
-    setGraphData([
-      10, 20, 30, 20, 10, 20, 40, 50, 20, 30, 10,
-      30, 20, 10, 20, 40, 50, 20, 30, 10
-    ]); 
-    
-    if (graphData) {
-      setGraphData(null);
-    } else {
-      setGraphData(data);
+  const handleHourlyClick = async () => {
+    try {
+      const response = await axios.get(`${WEATHER_BASE_URL}/forecast`, 
+        {
+          params: {
+            q: city,
+            appid: WEATHER_API_KEY,
+            units: 'metric'
+          }
+        }
+      )
+
+      const hourlyTemps = response.data.list.slice(0, 24).map(item => item.main.temp)
+
+      setGraphData(hourlyTemps)
     }
+
+  catch(error) {
+    console.error("Ошибка при загрузке прогноза:", error);
+  }
   };
 
 

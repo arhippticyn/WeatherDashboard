@@ -17,7 +17,6 @@ function App() {
     <div className="page-wrapper">
       <Header />
       <Hero />
-      <Cards onWeeklyClick={handleWeeklyClick} />
       <Main selectedCity={selectedCity}  />
       <Footer />
     </div>
