@@ -16,6 +16,7 @@ const Main = ({ searchValue }) => {
     setSelectedCity((prev) => (prev === city ? null : city));
   };
 
+
   return (
     <div className="main-wrapper">
       <main className="main">

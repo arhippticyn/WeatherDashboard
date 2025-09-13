@@ -62,26 +62,40 @@
     padding: 1rem;
 
     &-title {
-      font-size: 3rem;
-      font-weight: bold;
+      font-size: 2.3rem;
+      font-weight: 600;
       margin-bottom: 1rem;
     }
 
     &-subtitle {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+      color: #FFF;
+text-align: right;
+font-family: Montserrat;
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+width: 295px;
+margin-left: -118px;
     }
 
     &-date {
       font-size: 1rem;
-      margin-bottom: 2rem;
+      margin-left: 70px;
       opacity: 0.9;
+    }
+
+    &-down {
+      display: flex;
+      align-items: center;
+      justify-content: start;
     }
 
     .search-box {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 12px;
 
       input {
         padding: 0.7rem 1rem;
@@ -101,6 +115,13 @@
       }
     }
   }
+}
+
+hr {
+  width: 3px;
+height: 118px;
+background: #FFF;
+margin-left: 27px;
 }
 
 @media (min-width: 834px) {

@@ -1,71 +1,149 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
 
-export default function AuthModal() {
+export default function AuthModal({ setUsername, isHidden, setIsHidden }) {
   const [type, setType] = useState("register");
 
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+    if (type === "register") {
+      const emailExists = users.some((u) => u.email === data.email);
+      if (emailExists) {
+        toast.error("This email is already registered!");
+        return;
+      }
+
+      users.push(data);
+
+      setUsername(data.username);
+
+      localStorage.setItem("currentUser", JSON.stringify(data));
+      localStorage.setItem("users", JSON.stringify(users));
+
+      setIsHidden(true);
+
+      reset();
+
+      toast.success(`Account created for ${data.username}!`);
+    } else {
+      const isUser = users.some(
+        (user) =>
+          user.username === data.username && user.password === data.password
+      );
+
+      if (!isUser) {
+        toast.error("User with this name and password not found");
+        return;
+      }
+      setUsername(data.username);
+
+      localStorage.setItem("currentUser", JSON.stringify(data));
+
+      setIsHidden(true);
+
+      reset();
+
+      toast.success(`Welcome back, ${data.username}!`);
+    }
+  };
+
+  const onError = (errors) => {
+    Object.values(errors).forEach((err) => {
+      toast.error(err.message);
+    });
+  };
+
   return (
-    <div className="auth-backdrop">
-      <div className="auth-modal">
-        <h2 className="auth-modal__title">
-          {type === "register" ? "Sign up" : "Login"}
-        </h2>
-        <label className="auth-modal__label">
-          Username
-          <input
-            type="text"
-            placeholder="Username"
-            className="auth-modal__input"
-          />
-        </label>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
 
-        {type === "register" && (
-          <label className="auth-modal__label">
-            E-Mail
-            <input
-              type="email"
-              placeholder="E-Mail"
-              className="auth-modal__input"
-            />
-          </label>
-        )}
+      <div className={`auth-backdrop ${isHidden ? "is-hidden" : ""}`}>
+        <div className="auth-modal">
+          <h2 className="auth-modal__title">
+            {type === "register" ? "Sign up" : "Login"}
+          </h2>
 
-        <label className="auth-modal__label">
-          Password
-          <input
-            type="password"
-            placeholder="Password"
-            className="auth-modal__input"
-          />
-        </label>
+          <form onSubmit={handleSubmit(onSubmit, onError)}>
+            <label className="auth-modal__label">
+              Username
+              <input
+                type="text"
+                placeholder="Username"
+                className="auth-modal__input"
+                {...register("username", { required: "Username is required" })}
+              />
+            </label>
 
-        <button type="button" className="auth-modal__btn">
-          {type === "register" ? "Sign up" : "Login"}
-        </button>
+            {type === "register" && (
+              <label className="auth-modal__label">
+                E-Mail
+                <input
+                  type="email"
+                  placeholder="E-Mail"
+                  className="auth-modal__input"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+              </label>
+            )}
 
-        <p className="auth-modal__text">
-          {type === "register" ? (
-            <>
-              Already have an account?{" "}
-              <button
-                className="auth-modal__btn-change"
-                onClick={() => setType("login")}
-              >
-                Log in
-              </button>
-            </>
-          ) : (
-            <>
-              Don’t have an account?{" "}
-              <button
-                className="auth-modal__btn-change"
-                onClick={() => setType("register")}
-              >
-                Register
-              </button>
-            </>
-          )}
-        </p>
+            <label className="auth-modal__label">
+              Password
+              <input
+                type="password"
+                placeholder="Password"
+                className="auth-modal__input"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+              />
+            </label>
+
+            <button type="submit" className="auth-modal__btn">
+              {type === "register" ? "Sign up" : "Login"}
+            </button>
+          </form>
+
+          <p className="auth-modal__text">
+            {type === "register" ? (
+              <>
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="auth-modal__btn-change"
+                  onClick={() => setType("login")}
+                >
+                  Log in
+                </button>
+              </>
+            ) : (
+              <>
+                Don’t have an account?{" "}
+                <button
+                  type="button"
+                  className="auth-modal__btn-change"
+                  onClick={() => setType("register")}
+                >
+                  Register
+                </button>
+              </>
+            )}
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
