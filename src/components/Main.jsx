@@ -8,20 +8,17 @@ import Hero from "./Hero/Hero";
 import { Cards } from "./Cards/Cards";
 
 const Main = ({ searchValue }) => {
-  const [graphData, setGraphData] = useState(null);      
-  const [weeklyCity, setWeeklyCity] = useState(null);     
-  const [selectedCity, setSelectedCity] = useState(null); 
-
+  const [graphData, setGraphData] = useState(null);
+  const [weeklyCity, setWeeklyCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const handleSeeMoreClick = (city) => {
     setSelectedCity((prevCity) => (prevCity === city ? null : city));
   };
 
-
   const handleWeeklyClick = (city) => {
     setWeeklyCity(city);
   };
-
 
   return (
     <div className="main-wrapper">
@@ -31,14 +28,13 @@ const Main = ({ searchValue }) => {
           graphData={graphData}
           query={searchValue}
           setWeeklyCity={handleWeeklyClick}
-
           onSeeMoreClick={handleSeeMoreClick}
           selectedCity={selectedCity}
         />
 
-        {graphData && <Graph data={graphData} />}
-
         {selectedCity && <CardsCharact city={selectedCity} />}
+
+        {graphData && <Graph data={graphData} />}
 
         {weeklyCity && <WeatherForecast city={weeklyCity} />}
 
@@ -50,4 +46,3 @@ const Main = ({ searchValue }) => {
 };
 
 export default Main;
-
