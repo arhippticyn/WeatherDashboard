@@ -3,6 +3,10 @@ import { IoIosRefresh } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { CiTrash } from "react-icons/ci";
 import Graph from "../Graph/Graph";
+import axios from "axios";
+
+const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
 
 export const CardsItem = ({
   city,
@@ -12,11 +16,10 @@ export const CardsItem = ({
   imgSrc,
   imgAlt,
   temp,
-    setGraphData,
-  graphData
-}) {
-  
-   const splitDate = () => {
+  setGraphData,
+  onWeeklyClick,
+}) => {
+  const splitDate = () => {
     const splittedDate = date.split(" ");
     const dateProcessed = splittedDate[1];
     const formattedDate = dateProcessed.split("/").join(".");
@@ -29,20 +32,25 @@ export const CardsItem = ({
 
   splitDate();
 
-  const handleHourlyClick = () => {
-    setGraphData([
-      10, 20, 30, 20, 10, 20, 40, 50, 20, 30, 10,
-      30, 20, 10, 20, 40, 50, 20, 30, 10
-    ]); 
-    
-    if (graphData) {
-      setGraphData(null);
-    } else {
-      setGraphData(data);
+  const handleHourlyClick = async () => {
+    try {
+      const response = await axios.get(`${WEATHER_BASE_URL}/forecast`, {
+        params: {
+          q: city,
+          appid: WEATHER_API_KEY,
+          units: "metric",
+        },
+      });
+
+      const hourlyTemps = response.data.list
+        .slice(0, 24)
+        .map((item) => item.main.temp);
+
+      setGraphData(hourlyTemps);
+    } catch (error) {
+      console.error("Ошибка при загрузке прогноза:", error);
     }
   };
-
-
   return (
     <li className="cards__item item">
       <div className="item__location location">
@@ -52,21 +60,19 @@ export const CardsItem = ({
 
       <h2 className="item__temperature">{time}</h2>
 
-        <div className="item__buttons buttons">
-          <button className="buttons__hourly button" onClick={handleHourlyClick}>Hourly forecast</button>
-          <button className="buttons__weekly button">Weekly forecast</button>
-        </div>
+      <div className="item__buttons buttons">
+        <button className="buttons__hourly button" onClick={handleHourlyClick}>
+          Hourly forecast
+        </button>
+        <button
+          className="buttons__weekly button"
+          onClick={() => onWeeklyClick(city)}
+        >
+          Weekly forecast
+        </button>
+      </div>
 
-        <p className="item__date date">{splitDate()}</p>
-        <div className="item__main">
-          <div className="main__img-container img-Container">
-            <img src={imgSrc} alt={imgAlt} />
-          </div>
-          <h2 className="main__temp">{temp}</h2>
-        </div>
-
-
-      <p className="item__date date">{date}</p>
+      <p className="item__date date">{splitDate()}</p>
       <div className="item__main">
         <div className="main__img-container img-Container">
           <img src={imgSrc} alt={imgAlt} />

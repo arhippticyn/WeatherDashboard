@@ -11,7 +11,7 @@ const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
 
 axios.defaults.baseURL = WEATHER_BASE_URL;
 
-export default function CardsCharact({ city = "Kyiv" }) {
+export default function CardsCharact({ city }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,10 +24,8 @@ export default function CardsCharact({ city = "Kyiv" }) {
         `/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setData(response.data);
-
     } catch (error) {
-      setError("Не вдалося завантажити погоду" , error);
-
+      setError("Не вдалося завантажити погоду", error);
     } finally {
       setLoading(false);
     }
@@ -50,11 +48,19 @@ export default function CardsCharact({ city = "Kyiv" }) {
   if (!data) return null;
 
   const items = [
-    { label: "Feels like", value: `${Math.round(data.main.feels_like)}°C`, icon: temp },
+    {
+      label: "Feels like",
+      value: `${Math.round(data.main.feels_like)}°C`,
+      icon: temp,
+    },
     { label: "Humidity", value: `${data.main.humidity}%`, icon: cloud },
     { label: "Pressure", value: `${data.main.pressure} hPa`, icon: pressure },
     { label: "Wind speed", value: `${data.wind.speed} m/s`, icon: wind },
-    { label: "Visibility", value: `${data.visibility / 1000} km`, icon: visibility },
+    {
+      label: "Visibility",
+      value: `${data.visibility / 1000} km`,
+      icon: visibility,
+    },
   ];
 
   return (

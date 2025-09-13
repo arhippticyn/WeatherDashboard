@@ -7,19 +7,24 @@ import News from "./News/News";
 import Hero from "./Hero/Hero";
 import { Cards } from "./Cards/Cards";
 
-const Main = () => {
-  const [graphData,setGraphData] = useState(null)
-
+const Main = ({ searchValue }) => {
+  const [graphData, setGraphData] = useState(null);
+  const [weeklyCity, setWeeklyCity] = useState(null);
   return (
     <div className="main-wrapper">
       <main className="main">
-        <Cards setGraphData={setGraphData} graphData={graphData} query={searchValue} />        
-        <CardsCharact city="Kyiv" />
+        <Cards
+          setGraphData={setGraphData}
+          graphData={graphData}
+          query={searchValue}
+          setWeeklyCity={setWeeklyCity}
+        />
+        <CardsCharact city={searchValue} />
         {graphData && <Graph data={graphData} />}
-        <WeatherForecast />
+
+        <WeatherForecast city={searchValue} />
         <News />
         <Nature />
-
       </main>
     </div>
   );

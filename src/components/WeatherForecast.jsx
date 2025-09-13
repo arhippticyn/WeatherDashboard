@@ -14,14 +14,12 @@ const WeatherForecast = ({ city }) => {
   const fetchWeather = async () => {
     if (!city.trim()) return;
 
-
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get(
-        `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
-
+        `/forecast?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setForecast(response.data.list);
     } catch (error) {
@@ -34,7 +32,6 @@ const WeatherForecast = ({ city }) => {
 
   useEffect(() => {
     fetchWeather(city);
-
   }, [city]);
 
   const formatDate = (dateString) => {
@@ -62,7 +59,7 @@ const WeatherForecast = ({ city }) => {
 
   const groupForecastByDay = () => {
     const grouped = {};
-    
+
     forecast.forEach((item) => {
       const date = item.dt_txt.split(" ")[0];
 
@@ -89,7 +86,6 @@ const WeatherForecast = ({ city }) => {
 
       {!loading && !error && forecast.length > 0 && (
         <>
-
           <h2 className="weather__title">
             5-day forecast for <span className="weather__city">{city}</span>
           </h2>
