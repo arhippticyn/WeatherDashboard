@@ -68,9 +68,9 @@ export default function CardsCharact({ city }) {
     <div className="weather-container">
       {items.map((item, index) => (
         <div key={index} className="weather-card">
-          <img src={item.icon} alt={item.label} className="weather-icon" />
           <p className="label">{item.label}</p>
           <p className="value">{item.value}</p>
+          <img src={item.icon} alt={item.label} className="weather-icon" />
         </div>
       ))}
 
