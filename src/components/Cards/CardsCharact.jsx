@@ -25,17 +25,13 @@ export default function CardsCharact({ city = "Kyiv" }) {
         `/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setData(response.data);
-
-    } catch (err) {
-
     } catch (error) {
-
+      console.error("Помилка при запиті погоди:", error);
       setError("Не вдалося завантажити погоду");
     } finally {
       setLoading(false);
     }
   };
-
 
   useEffect(() => {
     fetchWeather();
