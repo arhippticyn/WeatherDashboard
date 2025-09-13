@@ -28,7 +28,6 @@ export default function CardsCharact({ city }) {
     } catch (error) {
       console.error("Помилка при запиті погоди:", error);
       setError("Не вдалося завантажити погоду");
-
     } finally {
       setLoading(false);
     }
@@ -47,7 +46,6 @@ export default function CardsCharact({ city }) {
     );
   }
 
-  if (error) return <p className="error">{error}</p>;
   if (!data) return null;
 
   const items = [
