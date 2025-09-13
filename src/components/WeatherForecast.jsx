@@ -11,58 +11,40 @@ const WeatherForecast = ({ city }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchWeather = async () => {
-    if (!city.trim()) return;
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.get(
-        `/forecast?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
-      );
-      setForecast(response.data.list);
-    } catch (error) {
-      console.error("Помилка завантаження погоди:", error);
-      setError("Не вдалося знайти прогноз для цього міста");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchWeather(city);
+    if (!city) return; // если город не выбран — ничего не показываем
+
+    const fetchWeather = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await axios.get(
+          `/forecast?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
+        );
+        setForecast(response.data.list);
+      } catch (error) {
+        console.error("Помилка завантаження погоди:", error);
+        setError("Не вдалося знайти прогноз для цього міста");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchWeather();
   }, [city]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const day = days[date.getDay()];
-    const number = date.getDate();
-    const month = months[date.getMonth()];
-    return `${day}, ${number} ${month}`;
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
   };
 
   const groupForecastByDay = () => {
     const grouped = {};
-
     forecast.forEach((item) => {
       const date = item.dt_txt.split(" ")[0];
-
       if (!grouped[date]) {
         grouped[date] = {
           date: item.dt_txt,
@@ -79,31 +61,32 @@ const WeatherForecast = ({ city }) => {
     return Object.values(grouped).slice(0, 5);
   };
 
+  if (!city) return null; // секция появится только после "See more"
+
   return (
     <div className="weather">
-      {loading && <p className="weather__loading">Завантаження погоди...</p>}
-      {error && <p className="weather__error">{error}</p>}
+      {loading && <p>Завантаження погоди...</p>}
+      {error && <p>{error}</p>}
 
       {!loading && !error && forecast.length > 0 && (
         <>
-          <h2 className="weather__title">
-            5-day forecast for <span className="weather__city">{city}</span>
+          <h2>
+            5-day forecast for <span>{city}</span>
           </h2>
           <div className="weather__list">
             {groupForecastByDay().map((item, index) => (
               <div key={index} className="weather__card">
-                <p className="weather__date">{formatDate(item.date)}</p>
+                <p>{formatDate(item.date)}</p>
                 <div className="weather__temps">
                   <img
-                    className="weather__icon"
                     src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
                     alt={item.description}
                   />
-                  <p className="weather__temp-main">
+                  <p>
                     {Math.round(item.max)}°C / {Math.round(item.min)}°C
                   </p>
                 </div>
-                <p className="weather__desc">{item.description}</p>
+                <p>{item.description}</p>
               </div>
             ))}
           </div>
