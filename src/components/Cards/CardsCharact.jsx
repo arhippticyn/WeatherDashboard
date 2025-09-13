@@ -17,6 +17,7 @@ export default function CardsCharact({ city }) {
   const [error, setError] = useState(null);
 
   const fetchWeather = async () => {
+    if (!city) return;
     setLoading(true);
     setError(null);
     try {
@@ -25,7 +26,9 @@ export default function CardsCharact({ city }) {
       );
       setData(response.data);
     } catch (error) {
-      setError("Не вдалося завантажити погоду", error);
+      console.error("Помилка при запиті погоди:", error);
+      setError("Не вдалося завантажити погоду");
+
     } finally {
       setLoading(false);
     }
