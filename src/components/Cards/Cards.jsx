@@ -12,7 +12,6 @@ export const Cards = ({
   query,
   setGraphData,
   setWeeklyCity,
-  onSeeMoreClick,
   selectedCity
 }) => {
   const [error, setError] = useState("");
@@ -79,7 +78,6 @@ export const Cards = ({
           {...card}
           setGraphData={setGraphData}
           onWeeklyClick={setWeeklyCity}
-          onSeeMoreClick={onSeeMoreClick}
           selectedCity={selectedCity}
         />
       ))}

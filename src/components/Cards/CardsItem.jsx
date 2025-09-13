@@ -17,7 +17,6 @@ export const CardsItem = ({
   temp,
   setGraphData,
   onWeeklyClick,
-  onSeeMoreClick,
   selectedCity,
 }) => {
   const handleHourlyClick = async () => {
@@ -75,8 +74,8 @@ export const CardsItem = ({
         <button className="control__like like">
           <FaRegHeart className="like__icon" />
         </button>
-        <button className="control__more button" onClick={() => onSeeMoreClick(city)}>
-          {selectedCity === city ? "Hide forecast" : "See more"}
+        <button className="control__more button" >
+          See more
         </button>
         <button className="contorl__delete delete">
           <CiTrash className="delete__icon" />

@@ -12,9 +12,6 @@ const Main = ({ searchValue }) => {
   const [weeklyCity, setWeeklyCity] = useState(null);        
   const [selectedCity, setSelectedCity] = useState(null);    
 
-  const handleSeeMoreClick = (city) => {
-    setSelectedCity((prev) => (prev === city ? null : city));
-  };
 
   return (
     <div className="main-wrapper">
@@ -24,7 +21,6 @@ const Main = ({ searchValue }) => {
           graphData={graphData}
           query={searchValue}
           setWeeklyCity={setWeeklyCity}
-          onSeeMoreClick={handleSeeMoreClick}
           selectedCity={selectedCity}
         />
 
