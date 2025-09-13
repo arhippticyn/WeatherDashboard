@@ -1,30 +1,26 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CardsCharact from "./Cards/CardsCharact";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const WEATHER_BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
 
 axios.defaults.baseURL = WEATHER_BASE_URL;
 
-const WeatherForecast = () => {
-  const [city, setCity] = useState("Kyiv");
+const WeatherForecast = ({ city }) => {
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState(null);
 
-  const fetchWeather = async (selectedCity = city) => {
-    if (!selectedCity.trim()) return;
+  const fetchWeather = async () => {
+    if (!city.trim()) return;
 
     setLoading(true);
     setError(null);
 
     try {
       const response = await axios.get(
-        `/forecast?q=${selectedCity}&units=metric&appid=${WEATHER_API_KEY}`
+        `/forecast?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
-
       setForecast(response.data.list);
     } catch (error) {
       console.error("Помилка завантаження погоди:", error);
@@ -35,8 +31,8 @@ const WeatherForecast = () => {
   };
 
   useEffect(() => {
-    fetchWeather();
-  }, []);
+    fetchWeather(city);
+  }, [city]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -61,10 +57,6 @@ const WeatherForecast = () => {
     return `${day}, ${number} ${month}`;
   };
 
-  const dailyForecast = forecast.filter((item) =>
-    item.dt_txt.includes("12:00:00")
-  );
-
   const groupForecastByDay = () => {
     const grouped = {};
 
@@ -84,36 +76,19 @@ const WeatherForecast = () => {
         grouped[date].max = Math.max(grouped[date].max, item.main.temp);
       }
     });
-
     return Object.values(grouped).slice(0, 5);
   };
 
   return (
     <div className="weather">
-      <div className="weather__search">
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Введіть місто"
-          className="weather__input"
-        />
-        <button
-          type="button"
-          onClick={() => fetchWeather(city)}
-          className="weather__button"
-        >
-          Пошук
-        </button>
-      </div>
-
       {loading && <p className="weather__loading">Завантаження погоди...</p>}
-
       {error && <p className="weather__error">{error}</p>}
 
       {!loading && !error && forecast.length > 0 && (
         <>
-          <h2 className="weather__title">5-day forecast</h2>
+          <h2 className="weather__title">
+            5-day forecast for <span className="weather__city">{city}</span>
+          </h2>
           <div className="weather__list">
             {groupForecastByDay().map((item, index) => (
               <div key={index} className="weather__card">

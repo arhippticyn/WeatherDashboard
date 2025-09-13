@@ -1,127 +1,154 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function AuthModal() {
+export default function AuthModal({ setUsername, isHidden, setIsHidden }) {
   const [type, setType] = useState("register");
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(""); 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const handleAuth = (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    if (!email || !password || (type === "register" && !username)) {
-      setError("Будь ласка, заповніть усі поля.");
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+  const onSubmit = (data) => {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
 
     if (type === "register") {
-      const existingUser = users.find(user => user.email === email);
-      if (existingUser) {
-        setError("Користувач з цим E-Mail вже існує.");
+      const emailExists = users.some((u) => u.email === data.email);
+      if (emailExists) {
+        toast.error("This email is already registered!");
         return;
       }
 
-      const newUser = { username, email, password };
-      users.push(newUser);
+      const usernameExists = users.some((u) => u.username === data.username);
+      if (usernameExists) {
+        toast.error("This username is already taken!");
+        return;
+      }
+
+      users.push(data);
       localStorage.setItem("users", JSON.stringify(users));
 
-      setSuccess(" Реєстрація успішна! Тепер увійдіть.");
-      setType("login");
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    } else {
-      const foundUser = users.find(user => user.email === email && user.password === password);
+      setUsername(data.username);
+      localStorage.setItem("currentUser", JSON.stringify(data));
 
-      if (foundUser) {
-        setSuccess(` Вітаємо, ${foundUser.username}!`);
-        localStorage.setItem("currentUser", JSON.stringify(foundUser));
-      } else {
-        setError("Неправильний E-Mail або пароль.");
+      setIsHidden(true);
+      reset();
+      toast.success(`Account created for ${data.username}!`);
+    } else {
+      const foundUser = users.find(
+        (user) =>
+          user.username === data.username && user.password === data.password
+      );
+
+      if (!foundUser) {
+        toast.error("User with this name and password not found");
+        return;
       }
+      setUsername(foundUser.username);
+      localStorage.setItem("currentUser", JSON.stringify(foundUser));
+      setIsHidden(true);
+      reset();
+      toast.success(`Welcome back, ${foundUser.username}!`);
     }
   };
 
+  const onError = (formErrors) => {
+    Object.values(formErrors).forEach((err) => {
+      toast.error(err.message);
+    });
+  };
+
   return (
-    <div className="auth-backdrop">
-      <div className="auth-modal">
-        <h2 className="auth-modal__title">
-          {type === "register" ? "Sign up" : "Login"}
-        </h2>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
 
-        {error && <div className="auth-message auth-message--error">{error}</div>}
-        {success && <div className="auth-message auth-message--success">{success}</div>}
+      <div className={`auth-backdrop ${isHidden ? "is-hidden" : ""}`}>
+        <div className="auth-modal">
+          <h2 className="auth-modal__title">
+            {type === "register" ? "Sign up" : "Login"}
+          </h2>
 
-        <form onSubmit={handleAuth}>
-          {type === "register" && (
+          <form onSubmit={handleSubmit(onSubmit, onError)}>
             <label className="auth-modal__label">
               Username
-              <input 
+              <input
                 type="text"
                 placeholder="Username"
                 className="auth-modal__input"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                {...register("username", { required: "Username is required" })}
               />
             </label>
-          )}
-          <label className="auth-modal__label">
-            E-Mail
-            <input 
-              type="email"
-              placeholder="E-Mail"
-              className="auth-modal__input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <label className="auth-modal__label">
-            Password
-            <input 
-              type="password"
-              placeholder="Password"
-              className="auth-modal__input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
 
-          <button type="submit" className="auth-modal__btn">
-            {type === "register" ? "Sign up" : "Login"}
-          </button>
-        </form>
-        
-        <p className="auth-modal__text">
-          {type === "register" ? (
-            <>
-              Already have an account?{" "}
-              <button 
-                className="auth-modal__btn-change"
-                onClick={() => { setType("login"); setError(""); setSuccess(""); }}
-              >
-                Log in
-              </button>
-            </>
-          ) : (
-            <>
-              Don’t have an account?{" "}
-              <button 
-                className="auth-modal__btn-change"
-                onClick={() => { setType("register"); setError(""); setSuccess(""); }}
-              >
-                Register
-              </button>
-            </>
-          )}
-        </p>
+            {type === "register" && (
+              <label className="auth-modal__label">
+                E-Mail
+                <input
+                  type="email"
+                  placeholder="E-Mail"
+                  className="auth-modal__input"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                />
+              </label>
+            )}
+
+            <label className="auth-modal__label">
+              Password
+              <input
+                type="password"
+                placeholder="Password"
+                className="auth-modal__input"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+              />
+            </label>
+
+            <button type="submit" className="auth-modal__btn">
+              {type === "register" ? "Sign up" : "Login"}
+            </button>
+          </form>
+
+          <p className="auth-modal__text">
+            {type === "register" ? (
+              <>
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="auth-modal__btn-change"
+                  onClick={() => setType("login")}
+                >
+                  Log in
+                </button>
+              </>
+            ) : (
+              <>
+                Don’t have an account?{" "}
+                <button
+                  type="button"
+                  className="auth-modal__btn-change"
+                  onClick={() => setType("register")}
+                >
+                  Register
+                </button>
+              </>
+            )}
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
