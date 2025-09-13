@@ -8,6 +8,12 @@
   backdrop-filter: blur(10px);
   opacity: 1;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+}
+
+.auth-backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .auth-modal {
@@ -22,6 +28,7 @@
   min-width: 293px;
 
   padding: 25px;
+
 
   @media (min-width: 834px) {
     padding: 30px 45px 20px;
