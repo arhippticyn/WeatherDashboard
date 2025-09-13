@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoIosRefresh } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { CiTrash } from "react-icons/ci";
-import Graph from "../Graph/Graph";
 import axios from "axios";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -18,20 +17,9 @@ export const CardsItem = ({
   temp,
   setGraphData,
   onWeeklyClick,
+  onSeeMoreClick,
+  selectedCity,
 }) => {
-  const splitDate = () => {
-    const splittedDate = date.split(" ");
-    const dateProcessed = splittedDate[1];
-    const formattedDate = dateProcessed.split("/").join(".");
-
-    const splittedDay = splittedDate[0].split(",");
-    const finalDate = formattedDate + " | " + splittedDay[0];
-
-    return finalDate;
-  };
-
-  splitDate();
-
   const handleHourlyClick = async () => {
     try {
       const response = await axios.get(`${WEATHER_BASE_URL}/forecast`, {
@@ -41,20 +29,18 @@ export const CardsItem = ({
           units: "metric",
         },
       });
-
-      const hourlyTemps = response.data.list
-        .slice(0, 24)
-        .map((item) => item.main.temp);
-
+      const hourlyTemps = response.data.list.slice(0, 24).map((item) => item.main.temp);
       setGraphData(hourlyTemps);
     } catch (error) {
       console.error("Ошибка при загрузке прогноза:", error);
     }
   };
 
-  const handleWeeklyClick = () => { 
-onWeeklyClick(city)
+  const formatDate = () => {
+    const dateObj = new Date(date);
+    return `${dateObj.toLocaleDateString()} | ${dateObj.toLocaleDateString('en-US', { weekday: 'short' })}`;
   };
+
   return (
     <li className="cards__item item">
       <div className="item__location location">
@@ -68,15 +54,13 @@ onWeeklyClick(city)
         <button className="buttons__hourly button" onClick={handleHourlyClick}>
           Hourly forecast
         </button>
-        <button
-          className="buttons__weekly button"
-          onClick={() => onWeeklyClick(city)}
-        >
+        <button className="buttons__weekly button" onClick={() => onWeeklyClick(city)}>
           Weekly forecast
         </button>
       </div>
 
-      <p className="item__date date">{splitDate()}</p>
+      <p className="item__date date">{formatDate()}</p>
+
       <div className="item__main">
         <div className="main__img-container img-Container">
           <img src={imgSrc} alt={imgAlt} />
@@ -91,7 +75,9 @@ onWeeklyClick(city)
         <button className="control__like like">
           <FaRegHeart className="like__icon" />
         </button>
-        <button className="control__more button">See more</button>
+        <button className="control__more button" onClick={() => onSeeMoreClick(city)}>
+          {selectedCity === city ? "Hide forecast" : "See more"}
+        </button>
         <button className="contorl__delete delete">
           <CiTrash className="delete__icon" />
         </button>

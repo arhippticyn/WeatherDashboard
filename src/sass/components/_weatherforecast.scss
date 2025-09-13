@@ -1,5 +1,6 @@
 .weather {
   font-family: "Montserrat", sans-serif;
+  width: 80%;
   font-weight: 400;
   padding: 20px;
   max-width: 900px;
@@ -11,6 +12,11 @@
     font-size: 14px;
     font-weight: 600;
     margin-left: 10%;
+  }
+
+  &__temps{
+    width: auto;
+    height: auto;
   }
 
   &__search {
