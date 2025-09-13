@@ -33,7 +33,7 @@ const Main = ({ searchValue }) => {
         {graphData && <Graph data={graphData} />}
 
         {selectedCity && <WeatherForecast city={selectedCity} />}
-
+        {weeklyCity && <WeatherForecast city={weeklyCity} />}
         <News />
         <Nature />
       </main>
