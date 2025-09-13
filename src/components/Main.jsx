@@ -21,8 +21,9 @@ const Main = ({ searchValue }) => {
         />
         <CardsCharact city={searchValue} />
         {graphData && <Graph data={graphData} />}
-
-        <WeatherForecast city={searchValue} />
+        
+        {weeklyCity && <WeatherForecast city={weeklyCity} />}
+        
         <News />
         <Nature />
       </main>

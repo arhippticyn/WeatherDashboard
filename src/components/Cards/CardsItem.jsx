@@ -51,6 +51,10 @@ export const CardsItem = ({
       console.error("Ошибка при загрузке прогноза:", error);
     }
   };
+
+  const handleWeeklyClick = () => { 
+onWeeklyClick(city)
+  };
   return (
     <li className="cards__item item">
       <div className="item__location location">
