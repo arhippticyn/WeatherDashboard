@@ -1,49 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
 import WeatherForecast from "./WeatherForecast";
-import CardsCharact from "./Cards/CardsCharact"
+import CardsCharact from "./Cards/CardsCharact";
 import News from "./News/News";
-import Hero from "./Hero/Hero"
+import Hero from "./Hero/Hero";
+import { Cards } from "./Cards/Cards";
 
-const Main = () => {
+const Main = ({ searchValue }) => {
+  const [graphData, setGraphData] = useState(null);      
+  const [weeklyCity, setWeeklyCity] = useState(null);     
+  const [selectedCity, setSelectedCity] = useState(null); 
+
+
+  const handleSeeMoreClick = (city) => {
+    setSelectedCity((prevCity) => (prevCity === city ? null : city));
+  };
+
+
+  const handleWeeklyClick = (city) => {
+    setWeeklyCity(city);
+  };
+
   return (
     <div className="main-wrapper">
       <main className="main">
-<<<<<<< Updated upstream
-=======
+
         <Cards
           setGraphData={setGraphData}
           graphData={graphData}
           query={searchValue}
-          setWeeklyCity={setWeeklyCity}
+          setWeeklyCity={handleWeeklyClick}
           onSeeMoreClick={handleSeeMoreClick}
           selectedCity={selectedCity}
         />
 
-{selectedCity && <CardsCharact city={selectedCity} />}
-
-
-
         {graphData && <Graph data={graphData} />}
 
-        {selectedCity && <WeatherForecast city={selectedCity} />}
+        {selectedCity && <CardsCharact city={selectedCity} />}
 
->>>>>>> Stashed changes
+        {weeklyCity && <WeatherForecast city={weeklyCity} />}
+
         <News />
         <Nature />
-        <Graph
-          data={[
-            10, 20, 30, 20, 10, 20, 40, 50, 20, 30, 10, 30, 20, 10, 20, 40, 50,
-            20, 30, 10,
-          ]}
-        ></Graph>
-        <CardsCharact city="Kyiv" />
-        <WeatherForecast />
       </main>
     </div>
   );
 };
 
 export default Main;
-

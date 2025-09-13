@@ -25,18 +25,18 @@ export default function CardsCharact({ city = "Kyiv" }) {
         `/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setData(response.data);
-<<<<<<< Updated upstream
+
     } catch (err) {
-=======
+
     } catch (error) {
->>>>>>> Stashed changes
+
       setError("Не вдалося завантажити погоду");
     } finally {
       setLoading(false);
     }
   };
 
-  // Викликаємо тільки коли місто вибране
+
   useEffect(() => {
     fetchWeather();
   }, [city]);
