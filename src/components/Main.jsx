@@ -10,6 +10,26 @@ const Main = () => {
   return (
     <div className="main-wrapper">
       <main className="main">
+<<<<<<< Updated upstream
+=======
+        <Cards
+          setGraphData={setGraphData}
+          graphData={graphData}
+          query={searchValue}
+          setWeeklyCity={setWeeklyCity}
+          onSeeMoreClick={handleSeeMoreClick}
+          selectedCity={selectedCity}
+        />
+
+{selectedCity && <CardsCharact city={selectedCity} />}
+
+
+
+        {graphData && <Graph data={graphData} />}
+
+        {selectedCity && <WeatherForecast city={selectedCity} />}
+
+>>>>>>> Stashed changes
         <News />
         <Nature />
         <Graph

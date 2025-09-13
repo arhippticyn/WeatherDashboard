@@ -17,6 +17,7 @@ export default function CardsCharact({ city = "Kyiv" }) {
   const [error, setError] = useState(null);
 
   const fetchWeather = async () => {
+    if (!city) return;
     setLoading(true);
     setError(null);
     try {
@@ -24,13 +25,18 @@ export default function CardsCharact({ city = "Kyiv" }) {
         `/weather?q=${city}&units=metric&appid=${WEATHER_API_KEY}`
       );
       setData(response.data);
+<<<<<<< Updated upstream
     } catch (err) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
       setError("Не вдалося завантажити погоду");
     } finally {
       setLoading(false);
     }
   };
 
+  // Викликаємо тільки коли місто вибране
   useEffect(() => {
     fetchWeather();
   }, [city]);
