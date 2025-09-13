@@ -22,15 +22,16 @@ const Main = ({ searchValue }) => {
     setWeeklyCity(city);
   };
 
+
   return (
     <div className="main-wrapper">
       <main className="main">
-
         <Cards
           setGraphData={setGraphData}
           graphData={graphData}
           query={searchValue}
           setWeeklyCity={handleWeeklyClick}
+
           onSeeMoreClick={handleSeeMoreClick}
           selectedCity={selectedCity}
         />
@@ -49,3 +50,4 @@ const Main = ({ searchValue }) => {
 };
 
 export default Main;
+
