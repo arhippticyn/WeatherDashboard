@@ -8,12 +8,16 @@ const WEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 axios.defaults.baseURL = WEATHER_BASE_URL;
 
-export const Cards = ({ query, setGraphData, graphData, setWeeklyCity }) => {
+export const Cards = ({
+  query,
+  setGraphData,
+  setWeeklyCity,
+  onSeeMoreClick,
+  selectedCity
+}) => {
   const [error, setError] = useState("");
-  const [contents, setContents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const [temperatures, setTemperatures] = useState([]);
 
   useEffect(() => {
     if (!query) return;
@@ -26,20 +30,13 @@ export const Cards = ({ query, setGraphData, graphData, setWeeklyCity }) => {
           `/forecast?q=${query}&units=metric&appid=${WEATHER_API_KEY}`
         );
 
-        console.log(response);
-        setContents(response);
-
         const temps = response.data.list;
-
         const currentHour = new Date().getHours();
 
         const closestTemp = temps.find((item) => {
           const forecastHour = new Date(item.dt_txt).getHours();
           return forecastHour >= currentHour;
-        });
-
-        const newTemps = closestTemp ? [closestTemp] : [temps[0]];
-        setTemperatures(newTemps);
+        }) || temps[0];
 
         const newCard = {
           city: response.data.city.name,
@@ -60,20 +57,14 @@ export const Cards = ({ query, setGraphData, graphData, setWeeklyCity }) => {
         };
 
         setCards((prevCards) => {
-          const newCards = [...prevCards];
-
-          if (newCards.length >= 3) {
-            newCards.pop();
-          }
-
-          return [newCard, ...newCards];
+          const updated = [newCard, ...prevCards.filter(card => card.city !== newCard.city)];
+          return updated.slice(0, 3); 
         });
 
         setLoading(false);
       } catch (error) {
         console.error(error);
-        setError(error);
-      } finally {
+        setError("City not found or API error");
       }
     };
 
@@ -81,25 +72,17 @@ export const Cards = ({ query, setGraphData, graphData, setWeeklyCity }) => {
   }, [query]);
 
   return (
-    <>
-      <ul className="cards__list">
-        {cards.map((card, index) => {
-          return (
-            <CardsItem
-              key={index}
-              city={card.city}
-              country={card.country}
-              time={card.time}
-              date={card.date}
-              imgSrc={card.imgSrc}
-              imgAlt={card.imgAlt}
-              temp={card.temp}
-              setGraphData={setGraphData}
-              onWeeklyClick={setWeeklyCity}
-            ></CardsItem>
-          );
-        })}
-      </ul>
-    </>
+    <ul className="cards__list">
+      {cards.map((card, index) => (
+        <CardsItem
+          key={index}
+          {...card}
+          setGraphData={setGraphData}
+          onWeeklyClick={setWeeklyCity}
+          onSeeMoreClick={onSeeMoreClick}
+          selectedCity={selectedCity}
+        />
+      ))}
+    </ul>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from "../image/forecastlogo.svg";
 
-// Импорт иконок из react-icons
+
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {

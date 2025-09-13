@@ -9,7 +9,13 @@ import { Cards } from "./Cards/Cards";
 
 const Main = ({ searchValue }) => {
   const [graphData, setGraphData] = useState(null);
-  const [weeklyCity, setWeeklyCity] = useState(null);
+  const [weeklyCity, setWeeklyCity] = useState(null);        
+  const [selectedCity, setSelectedCity] = useState(null);    
+
+  const handleSeeMoreClick = (city) => {
+    setSelectedCity((prev) => (prev === city ? null : city));
+  };
+
 
   return (
     <div className="main-wrapper">
@@ -19,12 +25,16 @@ const Main = ({ searchValue }) => {
           graphData={graphData}
           query={searchValue}
           setWeeklyCity={setWeeklyCity}
+          onSeeMoreClick={handleSeeMoreClick}
+          selectedCity={selectedCity}
         />
+
         <CardsCharact city={searchValue} />
 
         {graphData && <Graph data={graphData} />}
 
-        <WeatherForecast city={searchValue} />
+        {selectedCity && <WeatherForecast city={selectedCity} />}
+        {weeklyCity && <WeatherForecast city={weeklyCity} />}
         <News />
         <Nature />
       </main>
