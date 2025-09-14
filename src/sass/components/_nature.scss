@@ -1,15 +1,18 @@
 .nature {
-  max-width: 1140px;
+  display: none;
+  padding-left: 35px;
+  padding-right: 145px;
+    max-width: 1140px;
   margin: 0 auto;
-  &__title {
-    color: $text-dark;
-    font-family: Montserrat;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    margin-bottom: 40px;
-    line-height: normal;
-  }
+    &__title {
+        color: $text-dark;
+font-family: Montserrat;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+    }
+
 
   &__img {
     width: 384px;
@@ -63,8 +66,15 @@
   }
 }
 
-@media (max-width: 834px) {
+@media (min-width: 834px) {
+
   .nature {
     display: none;
+  }
+}
+
+@media (min-width: 1440px) {
+  .nature {
+    display: block;
   }
 }
