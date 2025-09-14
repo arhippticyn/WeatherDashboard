@@ -14,6 +14,7 @@ export const Cards = ({
   setWeeklyCity,
   onSeeMoreClick,
   selectedCity,
+  onDelete,
 }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -110,6 +111,7 @@ export const Cards = ({
 
   const handleDelete = (id) => {
     setCards((prev) => prev.filter((c) => c.id !== id));
+    onDelete();
   };
 
   const handleRefresh = async (id, city) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Nature from "./Nature/Nature";
 import Graph from "./Graph/Graph";
 import WeatherForecast from "./WeatherForecast";
@@ -11,6 +11,7 @@ const Main = ({ searchValue }) => {
   const [graphData, setGraphData] = useState(null);
   const [weeklyCity, setWeeklyCity] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+  const descrRef = useRef(null);
 
   const handleSeeMoreClick = (city) => {
     setSelectedCity((prevCity) => (prevCity === city ? null : city));
@@ -18,6 +19,12 @@ const Main = ({ searchValue }) => {
 
   const handleWeeklyClick = (city) => {
     setWeeklyCity(city);
+  };
+
+  const deleteCardDescr = () => {
+    setWeeklyCity(null);
+    setSelectedCity(null);
+    setGraphData(null);
   };
 
   return (
@@ -30,14 +37,16 @@ const Main = ({ searchValue }) => {
           setWeeklyCity={handleWeeklyClick}
           onSeeMoreClick={handleSeeMoreClick}
           selectedCity={selectedCity}
+          onDelete={deleteCardDescr}
         />
 
-        {selectedCity && <CardsCharact city={selectedCity} />}
+        <div className="cards__description" ref={descrRef}>
+          {selectedCity && <CardsCharact city={selectedCity} />}
 
-        {graphData && <Graph data={graphData} />}
+          {graphData && <Graph data={graphData} />}
 
-        {weeklyCity && <WeatherForecast city={weeklyCity} />}
-
+          {weeklyCity && <WeatherForecast city={weeklyCity} />}
+        </div>
         <News />
         <Nature />
       </main>
