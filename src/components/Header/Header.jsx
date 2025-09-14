@@ -4,21 +4,17 @@ import Button from "../Template/Button";
 import logoUser from "../../image/user.svg";
 import { GoChevronDown } from "react-icons/go";
 import BurgerMenu from "./BurgerMenu";
-import AuthModal from "../AuthModal/AuthModal";
 
 const Header = ({ username, setUsername, setIsHidden }) => {
   const [menu, setMenu] = useState(false);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenu((prev) => !prev);
   };
-  const toggleAuthModal = () => {
-    setIsAuthModalOpen((prev) => !prev);
-  };
 
   const logout = function () {
     localStorage.setItem("currentUser", JSON.stringify({}));
+
     setUsername("");
     setIsHidden(false);
   };
@@ -36,15 +32,21 @@ const Header = ({ username, setUsername, setIsHidden }) => {
           </h2>
 
           <ul className="header-nav-lists">
-            <li className="header-nav-lists__list">Who we are</li>
-            <li className="header-nav-lists__list">Contacts</li>
-            <li className="header-nav-lists__list">Menu</li>
+            <li className="header-nav-lists__list">
+              <a href="#">Who we are</a>
+            </li>
+            <li className="header-nav-lists__list">
+              <a href="#">Contacts</a>
+            </li>
+            <li className="header-nav-lists__list">
+              <a href="#">Menu</a>
+            </li>
           </ul>
 
           <Button
-            text={username ? username : "Sign Up"}
+            text={`${username ? username : "Sign Up"}`}
             style="header-nav__btn"
-            onClick={username ? logout : toggleAuthModal}
+            onClick={logout}
           />
 
           <img src={logoUser} alt="user" className="header-nav__user" />
@@ -57,9 +59,6 @@ const Header = ({ username, setUsername, setIsHidden }) => {
         toggleMenu={toggleMenu}
         username={username}
       />
-      {isAuthModalOpen && (
-        <AuthModal setIsHidden={setIsHidden} setUsername={setUsername} isHidden={false} />
-      )}
     </div>
   );
 };
