@@ -6,6 +6,7 @@
   "homepage": "https://arhippticyn.github.io/WeatherDashboard/",
   "scripts": {
     "dev": "vite",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
