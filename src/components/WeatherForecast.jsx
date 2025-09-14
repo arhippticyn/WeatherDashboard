@@ -37,10 +37,22 @@ const WeatherForecast = ({ city }) => {
     const date = new Date(dateString);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
-    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+    return `${days[date.getDay()]}, ${date.getDate()} ${
+      months[date.getMonth()]
+    }`;
   };
 
   const groupForecastByDay = () => {
@@ -60,7 +72,7 @@ const WeatherForecast = ({ city }) => {
         grouped[date].max = Math.max(grouped[date].max, item.main.temp);
       }
     });
-    return Object.values(grouped).slice(0, 5);
+    return Object.values(grouped).slice(0, 6);
   };
 
   return (
@@ -70,17 +82,22 @@ const WeatherForecast = ({ city }) => {
 
       {!loading && !error && forecast.length > 0 && (
         <>
-          <h2>5-day forecast for <span>{city}</span></h2>
+          <h2 className="weather__title">
+            5-day forecast for <span>{city}</span>
+          </h2>
           <div className="weather__list">
             {groupForecastByDay().map((item, index) => (
               <div key={index} className="weather__card">
-                <p>{formatDate(item.date)}</p>
+                <p className="weather__date">{formatDate(item.date)}</p>
                 <div className="weather__temps">
-                  <img className="weather__icon"
+                  <img
+                    className="weather__icon"
                     src={`https://openweathermap.org/img/wn/${item.icon}@2x.png`}
                     alt={item.description}
                   />
-                  <p>{Math.round(item.max)}°C / {Math.round(item.min)}°C</p>
+                  <p>
+                    {Math.round(item.max)}°C / {Math.round(item.min)}°C
+                  </p>
                 </div>
                 <p>{item.description}</p>
               </div>
