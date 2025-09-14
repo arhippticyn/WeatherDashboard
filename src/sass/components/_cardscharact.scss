@@ -1,67 +1,50 @@
 .weather-container {
-    width: 80%;
-    margin: 40px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    background: $background;
-    border-radius: 20px;
+  max-width: 293px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  padding: 35px 43px;
+  background: $background;
+  border-radius: 20px;
+  margin-top: 35px;
 }
 
 .weather-card {
-    width: 25%;
-    height: 217px;
-    background: $bg-card;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  max-width: 207px;
+  width: 100%;
+  background: $bg-card;
+  border-radius: 10px;
+  padding: 30px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    &:hover {
-        transform: translateY(-5px);
-    }
+  &:hover {
+    transform: translateY(-5px);
+  }
 
-    .weather-icon {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 12px;
-    }
+  .weather-icon {
+    width: 60px;
+    height: 60px;
+  }
 
-    .label {
-        font-size: 16px;
-        font-weight: 500;
-        color: $text-dark;
-        margin: 5px 0;
-    }
+  .label {
+    font-size: 10px;
+    font-weight: 500;
+    color: $text-dark;
+    margin-bottom: 8px;
+  }
 
-    .value {
-        font-size: 18px;
-        font-weight: bold;
-        color: $text-dark;
-        margin: 5px 0;
-    }
-}
-
-@media (max-width: 1024px) {
-    .weather-card {
-        flex: 1 1 calc(50% - 20px);
-        max-width: none;
-    }
-}
-
-@media (max-width: 600px) {
-    .weather-card {
-        flex: 1 1 100%;
-    }
+  .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-dark;
+    margin-bottom: 18px;
+  }
 }
 
 .loader-container {
@@ -91,4 +74,62 @@
   color: red;
   text-align: center;
   margin-top: 20px;
+}
+
+@media (min-width: 834px) {
+  .weather-container {
+    padding: 30px;
+    column-gap: 20px;
+    row-gap: 30px;
+    max-width: 634px;
+    margin-top: 50px;
+  }
+
+  .weather-card {
+    max-width: 177px;
+    padding: 20px 0px 40px;
+  }
+
+  .weather-card {
+    .label {
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      font-size: 16px;
+      margin-bottom: 37px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .weather-container {
+    padding: 40px 77px;
+    column-gap: 58px;
+    row-gap: 40px;
+    max-width: 1140px;
+    margin-top: 80px;
+  }
+
+  .weather-card {
+    max-width: 290px;
+  }
+
+  .weather-card {
+    .label {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 32px;
+      margin-bottom: 23px;
+    }
+  }
+
+  .weather-icon {
+    width: 85px;
+    height: 85px;
+  }
 }

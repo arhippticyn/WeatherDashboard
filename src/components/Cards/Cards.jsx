@@ -1,40 +1,6 @@
-import React from "react";
-import CardsItem from "./CardsItem";
+import React, { useEffect, useState } from "react";
+import { CardsItem } from "./CardsItem";
 import sun from "../../image/sun.png";
-<<<<<<< Updated upstream
-
-export default function Cards() {
-  return (
-    <>
-      <ul className="cards__list">
-        <CardsItem
-          city={"Prague"}
-          country={"Czech Republic"}
-          time={"14:00"}
-          date={"13.10.2023 | Friday"}
-          imgSrc={sun}
-          imgAlt={"Sun"}
-          temp={"22℃"}
-        ></CardsItem>
-        <CardsItem
-          city={"Prague"}
-          country={"Czech Republic"}
-          time={"14:00"}
-          date={"13.10.2023 | Friday"}
-          imgSrc={sun}
-          imgAlt={"Sun"}
-          temp={"22℃"}
-        ></CardsItem>{" "}
-        <CardsItem
-          city={"Prague"}
-          country={"Czech Republic"}
-          time={"14:00"}
-          date={"13.10.2023 | Friday"}
-          imgSrc={sun}
-          imgAlt={"Sun"}
-          temp={"22℃"}
-        ></CardsItem>
-=======
 import axios from "axios";
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
@@ -112,7 +78,7 @@ export const Cards = ({
           temp: `${Math.round(closestTemp.main.temp)}℃`,
           liked: false,
         };
-        
+
         setCards((prevCards) => {
           const existing = prevCards.find((c) => c.id === newCard.id);
           const updatedCard = existing
@@ -137,18 +103,15 @@ export const Cards = ({
     fetchCards();
   }, [query]);
 
-
   const handleLike = (id) => {
     setCards((prev) =>
       prev.map((c) => (c.id === id ? { ...c, liked: !c.liked } : c))
     );
   };
 
-
   const handleDelete = (id) => {
     setCards((prev) => prev.filter((c) => c.id !== id));
   };
-
 
   const handleRefresh = async (id, city) => {
     try {
@@ -203,8 +166,7 @@ export const Cards = ({
             onRefresh={() => handleRefresh(card.id, card.city)}
           />
         ))}
->>>>>>> Stashed changes
       </ul>
     </>
   );
-}
+};

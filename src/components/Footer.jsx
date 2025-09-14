@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 import logo from "../image/forecastlogo.svg";
 
-// Импорт иконок из react-icons
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
@@ -19,41 +18,43 @@ const Footer = () => {
           <span className="footer-adress_country">Ukraine</span>
         </section>
 
-        <p className="p">Contact us</p>
+        <nav className="footer__social social">
+          <p className="p">Contact us</p>
 
-        <nav className="footer__social">
-          <a
-            className="footer__social-link"
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            title="Instagram"
-          >
-            <FaInstagram size={24} />
-          </a>
+          <div className="social__container">
+            <a
+              className="footer__social-link"
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+            >
+              <FaInstagram size={24} />
+            </a>
 
-          <a
-            className="footer__social-link"
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            title="Facebook"
-          >
-            <FaFacebook size={24} />
-          </a>
+            <a
+              className="footer__social-link"
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              title="Facebook"
+            >
+              <FaFacebook size={24} />
+            </a>
 
-          <a
-            className="footer__social-link"
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
-            title="WhatsApp"
-          >
-            <FaWhatsapp size={24} />
-          </a>
+            <a
+              className="footer__social-link"
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+            >
+              <FaWhatsapp size={24} />
+            </a>
+          </div>
         </nav>
       </div>
     </footer>
