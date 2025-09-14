@@ -17,21 +17,20 @@ export const Cards = ({
 }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
+  const [cards, setCards] = useState(() => {
     try {
-      const stored = JSON.parse(localStorage.getItem("cards")) || [];
-      setCards(stored);
+      const stored = localStorage.getItem("cards");
+      return stored ? JSON.parse(stored) : [];
     } catch (e) {
-      console.error("Error reading localStorage cards:", e);
-      setCards([]);
+      console.error("Error parsing localStorage cards:", e);
+      return [];
     }
-  }, []);
+  });
 
   useEffect(() => {
     try {
-      localStorage.setItem("cards", JSON.stringify(cards));
+      const liked = cards.filter((c) => c.liked);
+      localStorage.setItem("cards", JSON.stringify(liked));
     } catch (e) {
       console.error("Error writing localStorage cards:", e);
     }
