@@ -118,10 +118,9 @@
       display: flex;
       gap: 20px;
     }
-
-    .footer-adress_str {
-      font-size: 10px;
-    }
+  }
+  .footer-adress_str {
+    font-size: 10px;
   }
 }
 
@@ -157,6 +156,10 @@
       font-size: 12px;
       margin-bottom: 15px;
     }
+    .p {
+      font-size: 12px;
+      text-align: center;
+    }
   }
 
   .social__container {
@@ -165,11 +168,6 @@
 
   .footer__social {
     width: 100%;
-  }
-
-  .p {
-    font-size: 12px;
-    text-align: center;
   }
 
   .footer__social-link {
