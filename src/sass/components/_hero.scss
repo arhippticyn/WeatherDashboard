@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
+    padding: 32px;
   }
   .search-box {
     display: flex;
@@ -27,7 +27,7 @@
     align-items: center;
 
     input {
-      padding: 0.7rem 1rem;
+      padding: 11.2px 16px;
       border: none;
       border-radius: 25px 0 0 25px;
       outline: none;
@@ -38,12 +38,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0.7rem 1rem;
+      padding: 11.2px 16px;
       border: none;
       border-radius: 0 25px 25px 0;
       background: #f5a623;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 19.2px;
       color: #fff;
       transition: background 0.3s ease;
 
@@ -52,19 +52,20 @@
       }
 
       svg {
-        font-size: 1.3rem;
+        font-size: 20.8px;
       }
     }
   }
 
   .hero-content {
     max-width: 800px;
+
     width: 100%;
 
     &-title {
-      font-size: 2.3rem;
+      font-size: 36.8px;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 16px;
     }
 
     &-subtitle {
@@ -100,7 +101,7 @@
       margin-top: 12px;
 
       input {
-        padding: 0.7rem 1rem;
+        padding: 11.2px 16px;
         border: none;
         border-radius: 25px 0 0 25px;
         outline: none;
@@ -108,12 +109,12 @@
       }
 
       button {
-        padding: 0.45rem 1rem;
+        padding: 7.2px 16px;
         border: none;
         border-radius: 0 25px 25px 0;
         background: #f5a623;
         cursor: pointer;
-        font-size: 1.2rem;
+        font-size: 19.2px;
       }
     }
   }
@@ -122,6 +123,7 @@
 hr {
   width: 3px;
   height: 118px;
+
   background: #fff;
 }
 
@@ -143,6 +145,7 @@ hr {
 
     .hero-content {
       &-title {
+
         font-size: 20px;
         margin-bottom: 40px;
       }
@@ -171,10 +174,11 @@ hr {
 
     .hero-content {
       &-title {
+
         font-size: 14px;
       }
       &-subtitle {
-        font-size: 1rem;
+        font-size: 16px; 
       }
       .search-box {
         flex-direction: column;
@@ -182,7 +186,7 @@ hr {
         input {
           width: 100%;
           border-radius: 25px;
-          margin-bottom: 0.5rem;
+          margin-bottom: 8px; 
         }
 
         button {
@@ -196,11 +200,11 @@ hr {
 
 @media (max-width: 480px) {
   hr {
-  width: 3px;
-height: 98px;
-background: #FFF;
-margin-right: 200px;
-}
+    width: 3px;
+    height: 98px;
+    background: #FFF;
+    margin-right: 200px;
+  }
   .hero {
     height: 70vh;
 
@@ -208,45 +212,43 @@ margin-right: 200px;
       padding-top: 10px;
       &-title {
         color: #FFF;
-font-family: Montserrat;
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
       }
-&-subtitle {
-color: #FFF;
-font-family: Montserrat;
-font-size: 10px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-width: 136px;
-// margin-left: 118px;
-// margin-top: 1px;
-position: absolute;
-left: 250px;
-top: 79px;
-    }
+      &-subtitle {
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        width: 136px;
+        position: absolute;
+        left: 250px;
+        top: 79px;
+      }
 
-    &-date {
-color: #FFF;
-font-family: Montserrat;
-font-size: 10px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-position: absolute;
-top: 129px;
-right: 175px;
-    }
+      &-date {
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: absolute;
+        top: 129px;
+        right: 175px;
+      }
 
-    &-down {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-    }
+      &-down {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+      }
     }
   }
 }
