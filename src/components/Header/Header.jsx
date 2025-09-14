@@ -32,9 +32,15 @@ const Header = ({ username, setUsername, setIsHidden }) => {
           </h2>
 
           <ul className="header-nav-lists">
-            <li className="header-nav-lists__list">Who we are</li>
-            <li className="header-nav-lists__list">Contacts</li>
-            <li className="header-nav-lists__list">Menu</li>
+            <li className="header-nav-lists__list">
+              <a href="#">Who we are</a>
+            </li>
+            <li className="header-nav-lists__list">
+              <a href="#">Contacts</a>
+            </li>
+            <li className="header-nav-lists__list">
+              <a href="#">Menu</a>
+            </li>
           </ul>
 
           <Button

@@ -1,18 +1,16 @@
 .nature {
   display: none;
-  padding-left: 35px;
-  padding-right: 145px;
-    max-width: 1140px;
-  margin: 0 auto;
-    &__title {
-        color: $text-dark;
-font-family: Montserrat;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-    }
 
+  max-width: 1140px;
+  margin: 0 auto;
+  &__title {
+    color: $text-dark;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 
   &__img {
     width: 384px;
@@ -67,7 +65,6 @@ line-height: normal;
 }
 
 @media (min-width: 834px) {
-
   .nature {
     display: none;
   }
