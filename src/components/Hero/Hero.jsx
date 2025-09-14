@@ -1,9 +1,14 @@
-import React, { use, useEffect } from "react";
+import React, { use, useEffect, useRef } from "react";
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 const Hero = ({ query, setQuery, onSearch }) => {
   const [date, setDate] = useState(new Date());
+  const inputRef = useRef(null);
+
+  const clearInput = () => {
+    inputRef.current.value = "";
+  };
 
   useEffect(() => {
     const now = new Date();
@@ -75,10 +80,15 @@ const Hero = ({ query, setQuery, onSearch }) => {
             <input
               type="text"
               placeholder="Search location..."
-              value={query}
+              ref={inputRef}
               onChange={(event) => setQuery(event.target.value)}
             />
-            <button onClick={onSearch}>
+            <button
+              onClick={() => {
+                onSearch();
+                clearInput();
+              }}
+            >
               <FiSearch />
             </button>
           </div>
