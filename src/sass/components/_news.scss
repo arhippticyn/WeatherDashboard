@@ -2,8 +2,8 @@
   padding: 40px 20px;
   margin-left: auto;
   margin-right: auto;
-  width: 1260px;
   justify-content: center;
+  max-width: 1140px;
 
   &__title {
     margin-bottom: 40px;
@@ -17,13 +17,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
     overflow: visible;
-    width: 1260px;
+    max-width: 1140px;
   }
 
   &__card {
-    flex: 0 0 300px;
+    flex: 0 0 260px;
     border-radius: 12px;
     overflow: hidden;
     background: #fff;
