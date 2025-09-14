@@ -10,41 +10,36 @@ import "swiper/css/pagination";
 const PIXABAY_KEY = import.meta.env.VITE_PIXABAY_KEY;
 const PIXABAY_BASE_URL = import.meta.env.VITE_PIXABAY_DATA;
 
-
-
 const Nature = () => {
-    const [images, setImages] = useState([])
-    const [page, setPage] = useState(1);
+  const [images, setImages] = useState([]);
+  const [page, setPage] = useState(1);
 
-    const fetchImages = async (pageNum = 1) => {
-  try {
-    const response = await axios.get(
-      `${PIXABAY_BASE_URL}?key=${PIXABAY_KEY}&category=mountains&image_type=photo&per_page=10&page=${pageNum}`
-    );
+  const fetchImages = async (pageNum = 1) => {
+    try {
+      const response = await axios.get(
+        `${PIXABAY_BASE_URL}?key=${PIXABAY_KEY}&category=mountains&image_type=photo&per_page=10&page=${pageNum}`
+      );
 
-    console.log("FULL RESPONSE:", response); // 👈 Посмотреть всё
-    console.log("DATA:", response.data);     // 👈 Посмотреть только data
+      console.log("FULL RESPONSE:", response); // 👈 Посмотреть всё
+      console.log("DATA:", response.data); // 👈 Посмотреть только data
 
-    if (Array.isArray(response.data?.hits)) {
-      setImages((prev) => [...prev, ...response.data.hits]);
-    } else {
-      console.error("Нет массива hits в ответе:", response.data);
+      if (Array.isArray(response.data?.hits)) {
+        setImages((prev) => [...prev, ...response.data.hits]);
+      } else {
+        console.error("Нет массива hits в ответе:", response.data);
+      }
+    } catch (error) {
+      console.log("Ошибка запроса:", error);
     }
-  } catch (error) {
-    console.log("Ошибка запроса:", error);
-  }
-};
+  };
 
-
-    useEffect(() => {
+  useEffect(() => {
     fetchImages(page);
-    }, [page]);
-
-
+  }, [page]);
 
   return (
     <section className="nature">
-        <h2 className="nature-title">Beautiful nature</h2>
+      <h2 className="nature__title">Beautiful nature</h2>
       <Swiper
         modules={[EffectCoverflow]}
         effect="coverflow"
@@ -64,12 +59,16 @@ const Nature = () => {
       >
         {images.map(({ webformatURL, id }) => (
           <SwiperSlide key={id}>
-            <img className="nature__img" src={webformatURL} alt={`nature-${id}`} />
+            <img
+              className="nature__img"
+              src={webformatURL}
+              alt={`nature-${id}`}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
     </section>
-  )
-}
+  );
+};
 
 export default Nature;

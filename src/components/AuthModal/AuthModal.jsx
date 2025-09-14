@@ -1,17 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function AuthModal({ setUsername, isHidden, setIsHidden }) {
   const [type, setType] = useState("register");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
@@ -23,41 +17,42 @@ export default function AuthModal({ setUsername, isHidden, setIsHidden }) {
         return;
       }
 
-      const usernameExists = users.some((u) => u.username === data.username);
-      if (usernameExists) {
-        toast.error("This username is already taken!");
-        return;
-      }
-
       users.push(data);
-      localStorage.setItem("users", JSON.stringify(users));
 
       setUsername(data.username);
+
       localStorage.setItem("currentUser", JSON.stringify(data));
+      localStorage.setItem("users", JSON.stringify(users));
 
       setIsHidden(true);
+
       reset();
+
       toast.success(`Account created for ${data.username}!`);
     } else {
-      const foundUser = users.find(
+      const isUser = users.some(
         (user) =>
           user.username === data.username && user.password === data.password
       );
 
-      if (!foundUser) {
+      if (!isUser) {
         toast.error("User with this name and password not found");
         return;
       }
-      setUsername(foundUser.username);
-      localStorage.setItem("currentUser", JSON.stringify(foundUser));
+      setUsername(data.username);
+
+      localStorage.setItem("currentUser", JSON.stringify(data));
+
       setIsHidden(true);
+
       reset();
-      toast.success(`Welcome back, ${foundUser.username}!`);
+
+      toast.success(`Welcome back, ${data.username}!`);
     }
   };
 
-  const onError = (formErrors) => {
-    Object.values(formErrors).forEach((err) => {
+  const onError = (errors) => {
+    Object.values(errors).forEach((err) => {
       toast.error(err.message);
     });
   };

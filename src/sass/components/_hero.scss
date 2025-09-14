@@ -59,7 +59,7 @@
 
   .hero-content {
     max-width: 800px;
-    padding: 1rem;
+    width: 100%;
 
     &-title {
       font-size: 2.3rem;
@@ -68,27 +68,29 @@
     }
 
     &-subtitle {
-      color: #FFF;
-text-align: right;
-font-family: Montserrat;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-width: 295px;
-margin-left: -118px;
+      color: $text-light;
+      text-align: right;
+      font-family: Montserrat;
+      font-size: 24px;
+      font-style: normal;
+      line-height: normal;
+      width: 345px;
+      margin-right: 52px;
     }
 
     &-date {
-      font-size: 1rem;
-      margin-left: 70px;
+      font-size: 24px;
+      margin-left: 52px;
       opacity: 0.9;
     }
 
     &-down {
       display: flex;
-      align-items: center;
-      justify-content: start;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      max-width: 620px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     .search-box {
@@ -119,9 +121,8 @@ margin-left: -118px;
 
 hr {
   width: 3px;
-height: 118px;
-background: #FFF;
-margin-left: 27px;
+  height: 118px;
+  background: #fff;
 }
 
 @media (min-width: 834px) {
@@ -136,28 +137,41 @@ margin-left: 27px;
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
   .hero {
-    height: 60vh;
+    height: 40vh;
 
     .hero-content {
       &-title {
-        font-size: 2.5rem;
+        font-size: 20px;
+        margin-bottom: 40px;
       }
       &-subtitle {
-        font-size: 1.1rem;
+        font-size: 14px;
+        max-width: 175px;
+        margin-right: 25px;
+      }
+
+      &-date {
+        font-size: 14px;
+        width: 94px;
+        margin-left: 25px;
+      }
+      &-down {
+        max-width: 360px;
+        margin-bottom: 64px;
       }
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 834px) {
   .hero {
-    height: 50vh;
+    height: 40vh;
 
     .hero-content {
       &-title {
-        font-size: 2rem;
+        font-size: 14px;
       }
       &-subtitle {
         font-size: 1rem;

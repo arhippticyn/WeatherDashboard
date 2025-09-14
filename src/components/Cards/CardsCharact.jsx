@@ -17,6 +17,7 @@ export default function CardsCharact({ city }) {
   const [error, setError] = useState(null);
 
   const fetchWeather = async () => {
+    if (!city) return;
     setLoading(true);
     setError(null);
     try {
@@ -25,7 +26,8 @@ export default function CardsCharact({ city }) {
       );
       setData(response.data);
     } catch (error) {
-      setError("Не вдалося завантажити погоду", error);
+      console.error("Помилка при запиті погоди:", error);
+      setError("Не вдалося завантажити погоду");
     } finally {
       setLoading(false);
     }
@@ -44,7 +46,6 @@ export default function CardsCharact({ city }) {
     );
   }
 
-  if (error) return <p className="error">{error}</p>;
   if (!data) return null;
 
   const items = [
@@ -67,9 +68,9 @@ export default function CardsCharact({ city }) {
     <div className="weather-container">
       {items.map((item, index) => (
         <div key={index} className="weather-card">
-          <img src={item.icon} alt={item.label} className="weather-icon" />
           <p className="label">{item.label}</p>
           <p className="value">{item.value}</p>
+          <img src={item.icon} alt={item.label} className="weather-icon" />
         </div>
       ))}
 
