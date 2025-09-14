@@ -1,4 +1,5 @@
 .nature {
+  display: none;
   padding-left: 35px;
   padding-right: 145px;
     &__title {
@@ -58,4 +59,14 @@ line-height: normal;
 }
 
 
+@media (min-width: 834px) {
+  .nature {
+    display: none;
+  }
+}
 
+@media (min-width: 1440px) {
+  .nature {
+    display: block;
+  }
+}
