@@ -56,3 +56,15 @@
     }
   }
 }
+
+@media (max-width: 1440px) {
+  .nature {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 834px) {
+  .nature {
+    display: none;
+  }
+}

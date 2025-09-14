@@ -1,13 +1,12 @@
 .footer {
-  background: #ffb36c;
-  color: #fff;
+  background: $primary-color;
+  color: $text-light;
   padding: 40px 20px;
-  margin: -8px;
   font-family: "Montserrat Alternates";
   margin-top: 20%;
 
   &__inner {
-    max-width: 1200px;
+    max-width: 1140px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -18,12 +17,9 @@
   &__brand {
     display: inline-flex;
     align-items: center;
-
-    .footer__logo {
-      margin-left: 100px;
-      width: auto;
-      height: auto;
-    }
+    margin-right: 103px;
+    width: 90px;
+    height: 62px;
   }
 
   .footer-adress {
@@ -31,45 +27,43 @@
     flex-direction: column;
     font-size: 14px;
     line-height: 1.5;
-    margin-left: 10%;
     font-weight: 500;
+    margin-right: 103px;
 
     &_span {
-      margin-bottom: 6px;
-      color: #000000;
-      font-size: 15px;
+      margin-bottom: 10px;
+      color: $text-dark;
+      font-size: 16px;
     }
 
     &_str,
     &_sity,
     &_country {
-      font-size: 13px;
-      color: #000000;
+      font-size: 12px;
+      color: $text-dark;
     }
   }
 
   .p {
-    margin: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    margin-left: 60px;
-    color: #000000;
+    color: $text-dark;
   }
 
   &__social {
-    margin-top: 30px;
-    margin-left: -6%;
     display: flex;
     gap: 12px;
+    flex-direction: column;
 
     &-link {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 50%;
       transition: background 0.3s ease;
+      padding: 5px;
 
       &:hover {
         background: #444;
@@ -85,48 +79,107 @@
   }
 }
 
-@media (max-width: 834px) {
-  .footer__brand {
-    margin-left: -30px;
-  }
-  .footer__social {
-    margin-left: -9%;
+.social__container {
+  display: flex;
+}
+
+@media (max-width: 1440px) {
+  .footer {
+    padding: 35px 100px 35px;
+
+    &__inner {
+      max-width: 634px;
+      margin: 0;
+    }
+
+    &__brand {
+      width: 58px;
+      height: 40px;
+      margin-right: 100px;
+    }
+
+    &-adress {
+      margin-right: 100px;
+    }
+
+    .footer-adress_span {
+      font-size: 14px;
+    }
+
+    .p {
+      font-size: 14px;
+    }
+
+    .footer__social-link {
+      width: 35px;
+      height: 35px;
+    }
+
+    .social__container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-adress_str {
+      font-size: 10px;
+    }
   }
 }
 
-@media (max-width: 393px) {
+@media (max-width: 834px) {
   .footer {
+    padding: 30px 50px;
+
     &__inner {
-      flex-direction: column;
-      align-items: center;
+      max-width: 300px;
+      margin: 0;
     }
+
     &__brand {
-      position: absolute;
-      left: -17%;
-      .footer__logo {
-        margin-left: 120px;
-        width: 60px;
-        height: auto;
-      }
+      width: 50px;
+      height: 34px;
+      margin-right: 75px;
     }
 
     .footer-adress {
-      margin-bottom: 10%;
-
       &_str,
       &_sity,
       &_country {
         font-size: 8px;
-        color: #000000;
       }
     }
 
-    .p {
-      margin-left: 0;
+    &-adress {
+      margin-right: 0;
+      margin-bottom: 25px;
     }
-    .footer__social {
-      gap: 15px;
-      margin-left: 3%;
+
+    .footer-adress_span {
+      font-size: 12px;
+      margin-bottom: 15px;
     }
+  }
+
+  .social__container {
+    justify-content: center;
+  }
+
+  .footer__social {
+    width: 100%;
+  }
+
+  .p {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .footer__social-link {
+    width: 35px;
+    height: 35px;
+  }
+
+  .social__container {
+    display: flex;
+    gap: 20px;
   }
 }
